@@ -115,8 +115,10 @@ def parse_args():
     parser.add_argument("--lr-gamma", type=float, default=config.LR_GAMMA)
     parser.add_argument("--seed", type=int, default=config.SEED)
     parser.add_argument("--device", type=str, default="auto")
-    parser.add_argument("--use-class-weights", action="store_true",
-                        help="use inverse-frequency class weights in the loss")
+    parser.add_argument("--use-class-weights", action=argparse.BooleanOptionalAction,
+                        default=config.USE_CLASS_WEIGHTS,
+                        help="use inverse-frequency class weights in the loss "
+                             "(--no-use-class-weights to disable)")
     parser.add_argument("--label-smoothing", type=float,
                         default=config.LABEL_SMOOTHING,
                         help="label smoothing factor for the loss")
