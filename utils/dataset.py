@@ -70,10 +70,11 @@ class BUSIDataset(Dataset):
 def build_transforms(img_size):
     """Build train/eval transforms (eval uses only resize + normalize)."""
     train_transform = transforms.Compose([
-        transforms.Resize((img_size, img_size)),
+        transforms.RandomResizedCrop(img_size, scale=(0.7, 1.0)),
         transforms.RandomHorizontalFlip(p=0.5),
-        transforms.RandomRotation(degrees=15),
-        transforms.ColorJitter(brightness=0.2, contrast=0.2),
+        transforms.RandomVerticalFlip(p=0.3),
+        transforms.RandomRotation(degrees=20),
+        transforms.ColorJitter(brightness=0.3, contrast=0.3),
         transforms.ToTensor(),
         transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
     ])
@@ -125,10 +126,13 @@ def build_loaders(data_dir, img_size=224, batch_size=32, num_workers=4,
                           eval_transform)
 
     train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
-                              num_workers=num_workers, pin_memory=True)
+                              num_workers=num_workers, pin_memory=True,
+                              persistent_workers=num_workers > 0)
     val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False,
-                            num_workers=num_workers, pin_memory=True)
+                            num_workers=num_workers, pin_memory=True,
+                            persistent_workers=num_workers > 0)
     test_loader = DataLoader(test_ds, batch_size=batch_size, shuffle=False,
-                             num_workers=num_workers, pin_memory=True)
+                             num_workers=num_workers, pin_memory=True,
+                             persistent_workers=num_workers > 0)
 
     return train_loader, val_loader, test_loader, classes

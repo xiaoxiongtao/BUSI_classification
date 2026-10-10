@@ -166,14 +166,42 @@ def resnet101(num_classes=3, **kwargs):
     return ResNet(Bottleneck, [3, 4, 23, 3], num_classes=num_classes, **kwargs)
 
 
-def build_resnet(depth=18, num_classes=3, **kwargs):
-    """Build a ResNet by depth."""
+def build_resnet(depth=18, num_classes=3, pretrained=False, **kwargs):
+    """Build a ResNet by depth.
+
+    If ``pretrained`` is True, load ImageNet weights for the convolutional
+    backbone (the classifier head is left randomly initialized, since the
+    number of classes differs).
+    """
     if depth == 18:
-        return resnet18(num_classes=num_classes, **kwargs)
-    if depth == 34:
-        return resnet34(num_classes=num_classes, **kwargs)
-    if depth == 50:
-        return resnet50(num_classes=num_classes, **kwargs)
-    if depth == 101:
-        return resnet101(num_classes=num_classes, **kwargs)
-    raise ValueError(f"Unsupported ResNet depth: {depth}")
+        model = resnet18(num_classes=num_classes, **kwargs)
+    elif depth == 34:
+        model = resnet34(num_classes=num_classes, **kwargs)
+    elif depth == 50:
+        model = resnet50(num_classes=num_classes, **kwargs)
+    elif depth == 101:
+        model = resnet101(num_classes=num_classes, **kwargs)
+    else:
+        raise ValueError(f"Unsupported ResNet depth: {depth}")
+
+    if pretrained:
+        model = _load_pretrained(model, depth)
+    return model
+
+
+def _load_pretrained(model, depth):
+    """Copy ImageNet backbone weights into ``model``, ignoring the fc head."""
+    from torchvision import models as tv_models
+
+    builders = {
+        18: (tv_models.resnet18, tv_models.ResNet18_Weights.IMAGENET1K_V1),
+        34: (tv_models.resnet34, tv_models.ResNet34_Weights.IMAGENET1K_V1),
+        50: (tv_models.resnet50, tv_models.ResNet50_Weights.IMAGENET1K_V1),
+        101: (tv_models.resnet101, tv_models.ResNet101_Weights.IMAGENET1K_V1),
+    }
+    builder, weights = builders[depth]
+    state = builder(weights=weights).state_dict()
+    for key in ("fc.weight", "fc.bias"):
+        state.pop(key, None)
+    model.load_state_dict(state, strict=False)
+    return model

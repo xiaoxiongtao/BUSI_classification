@@ -85,7 +85,8 @@ def evaluate(model, loader, criterion, device):
 
 def build_model(args, num_classes):
     if args.model == "resnet":
-        model = build_resnet(depth=args.depth, num_classes=num_classes)
+        model = build_resnet(depth=args.depth, num_classes=num_classes,
+                             pretrained=args.pretrained)
         name = f"resnet{args.depth}"
     elif args.model == "vit":
         model = build_vit(image_size=args.img_size, patch_size=args.patch_size,
@@ -116,6 +117,13 @@ def parse_args():
     parser.add_argument("--device", type=str, default="auto")
     parser.add_argument("--use-class-weights", action="store_true",
                         help="use inverse-frequency class weights in the loss")
+    parser.add_argument("--label-smoothing", type=float,
+                        default=config.LABEL_SMOOTHING,
+                        help="label smoothing factor for the loss")
+    parser.add_argument("--pretrained", action="store_true",
+                        default=config.PRETRAINED,
+                        help="initialize the ResNet backbone with ImageNet "
+                             "weights (--no-pretrained to train from scratch)")
     parser.add_argument("--early-stop", type=int, default=config.EARLY_STOP_PATIENCE,
                         help="early-stopping patience in epochs (0 disables it)")
 
@@ -152,7 +160,7 @@ def main():
     n_params = sum(p.numel() for p in model.parameters())
     print(f"Model: {model_name} | Params: {n_params / 1e6:.2f}M")
 
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(label_smoothing=args.label_smoothing)
     if args.use_class_weights:
         train_ds = train_loader.dataset
         counter = Counter(label for _, label in train_ds.samples)
