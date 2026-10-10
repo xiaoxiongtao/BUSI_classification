@@ -1,0 +1,62 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- 测试与覆盖率 ----
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ---- 缓存与临时文件 ----
+.cache/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# ---- Jupyter Notebook ----
+.ipynb_checkpoints/
+*.ipynb_checkpoints*
+
+# ---- 本项目：数据集（需自行下载，勿提交）----
+data/Dataset_BUSI_with_GT/
+
+# ---- 本项目：训练/评估输出（权重、日志、图表）----
+outputs/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+
+# ---- IDE（按需取消注释）----
+# .vscode/
+.idea/
+*.swp
+*.swo
