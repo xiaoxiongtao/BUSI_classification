@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.vscode/
 
 # ---- 虚拟环境 ----
 .venv/
