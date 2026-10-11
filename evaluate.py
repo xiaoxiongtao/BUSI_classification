@@ -21,7 +21,7 @@ import torch.nn as nn
 from sklearn.metrics import classification_report
 
 import config
-from models import build_resnet, build_vit
+from models import build_resnet, build_vit, build_pretrained_vit
 from utils.dataset import build_loaders
 from utils.metrics import AverageMeter, compute_metrics
 from utils.visualization import plot_confusion_matrix
@@ -38,11 +38,18 @@ def build_model(args, num_classes):
         model = build_resnet(depth=args.depth, num_classes=num_classes)
         name = f"resnet{args.depth}"
     elif args.model == "vit":
-        model = build_vit(image_size=args.img_size, patch_size=args.patch_size,
-                          num_classes=num_classes, dim=args.vit_dim,
-                          depth=args.vit_depth, heads=args.vit_heads,
-                          mlp_dim=args.vit_mlp_dim, dropout=args.vit_dropout)
-        name = "vit"
+        if args.pretrained:
+            model = build_pretrained_vit(variant=args.vit_variant,
+                                         num_classes=num_classes,
+                                         image_size=args.img_size)
+            name = f"vit_{args.vit_variant}"
+        else:
+            model = build_vit(image_size=args.img_size,
+                              patch_size=args.patch_size,
+                              num_classes=num_classes, dim=args.vit_dim,
+                              depth=args.vit_depth, heads=args.vit_heads,
+                              mlp_dim=args.vit_mlp_dim, dropout=args.vit_dropout)
+            name = "vit"
     else:
         raise ValueError(f"Unknown model: {args.model}")
     return model, name
@@ -93,8 +100,14 @@ def parse_args():
                         help="path to a checkpoint (defaults to best checkpoint)")
     parser.add_argument("--split", type=str, default="test", choices=["test", "val"],
                         help="which split to evaluate")
+    parser.add_argument("--pretrained", action=argparse.BooleanOptionalAction,
+                        default=config.PRETRAINED,
+                        help="match train.py's pretrained backbone setting")
 
     # ViT hyperparameters (must match training)
+    parser.add_argument("--vit-variant", type=str, default=config.VIT_VARIANT,
+                        choices=["b16", "b32", "l16", "l32"],
+                        help="pretrained torchvision ViT variant")
     parser.add_argument("--patch-size", type=int, default=config.VIT_PATCH_SIZE)
     parser.add_argument("--vit-dim", type=int, default=config.VIT_DIM)
     parser.add_argument("--vit-depth", type=int, default=config.VIT_DEPTH)

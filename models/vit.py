@@ -141,3 +141,29 @@ def build_vit(image_size=224, patch_size=16, num_classes=3, dim=256,
     return ViT(image_size=image_size, patch_size=patch_size,
                num_classes=num_classes, dim=dim, depth=depth, heads=heads,
                mlp_dim=mlp_dim, dropout=dropout, **kwargs)
+
+
+def build_pretrained_vit(variant="b16", num_classes=3, image_size=224):
+    """Build a torchvision ViT initialized with ImageNet weights.
+
+    The classification head is replaced with a fresh ``num_classes``-way
+    layer (torchvision forces 1000 classes when pretrained weights are
+    loaded, so the head is swapped afterwards).
+    """
+    from torchvision import models as tv_models
+
+    variants = {
+        "b16": (tv_models.vit_b_16, tv_models.ViT_B_16_Weights.IMAGENET1K_V1),
+        "b32": (tv_models.vit_b_32, tv_models.ViT_B_32_Weights.IMAGENET1K_V1),
+        "l16": (tv_models.vit_l_16, tv_models.ViT_L_16_Weights.IMAGENET1K_V1),
+        "l32": (tv_models.vit_l_32, tv_models.ViT_L_32_Weights.IMAGENET1K_V1),
+    }
+    if variant not in variants:
+        raise ValueError(f"Unknown ViT variant: {variant} "
+                         f"(choose from {sorted(variants)})")
+
+    builder, weights = variants[variant]
+    model = builder(weights=weights, image_size=image_size)
+    in_features = model.heads.head.in_features
+    model.heads.head = nn.Linear(in_features, num_classes)
+    return model

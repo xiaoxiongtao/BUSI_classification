@@ -22,6 +22,7 @@ SEED = 42
 # --- Training ---
 EPOCHS = 50
 LEARNING_RATE = 3e-4
+VIT_LEARNING_RATE = 1e-4  # pretrained ViT is unstable at 3e-4
 WEIGHT_DECAY = 1e-4
 LR_STEP_SIZE = 15
 LR_GAMMA = 0.1
@@ -34,6 +35,7 @@ USE_CLASS_WEIGHTS = True
 RESNET_DEPTH = 18  # 18 / 34 / 50 / 101
 
 # --- ViT ---
+VIT_VARIANT = "b16"  # b16 / b32 / l16 / l32 (pretrained torchvision ViT)
 VIT_PATCH_SIZE = 16
 VIT_DIM = 256
 VIT_DEPTH = 6

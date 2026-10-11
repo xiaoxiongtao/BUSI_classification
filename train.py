@@ -1,9 +1,10 @@
 """Train a ResNet or ViT model on the BUSI dataset.
 
-Examples:
+Both backbones are initialized with ImageNet weights by default. Examples:
     python train.py --model resnet --depth 18 --epochs 50
     python train.py --model vit --epochs 50
-    python train.py --model resnet --depth 50 --use-class-weights
+    python train.py --model vit --vit-variant b16 --epochs 50
+    python train.py --model resnet --depth 18 --no-pretrained --no-use-class-weights
 """
 import matplotlib
 matplotlib.use("Agg")  # non-interactive backend for headless training
@@ -18,7 +19,7 @@ import torch
 import torch.nn as nn
 
 import config
-from models import build_resnet, build_vit
+from models import build_resnet, build_vit, build_pretrained_vit
 from utils.dataset import build_loaders
 from utils.metrics import AverageMeter, compute_metrics
 from utils.visualization import plot_training_curves, plot_confusion_matrix
@@ -89,11 +90,18 @@ def build_model(args, num_classes):
                              pretrained=args.pretrained)
         name = f"resnet{args.depth}"
     elif args.model == "vit":
-        model = build_vit(image_size=args.img_size, patch_size=args.patch_size,
-                          num_classes=num_classes, dim=args.vit_dim,
-                          depth=args.vit_depth, heads=args.vit_heads,
-                          mlp_dim=args.vit_mlp_dim, dropout=args.vit_dropout)
-        name = "vit"
+        if args.pretrained:
+            model = build_pretrained_vit(variant=args.vit_variant,
+                                         num_classes=num_classes,
+                                         image_size=args.img_size)
+            name = f"vit_{args.vit_variant}"
+        else:
+            model = build_vit(image_size=args.img_size,
+                              patch_size=args.patch_size,
+                              num_classes=num_classes, dim=args.vit_dim,
+                              depth=args.vit_depth, heads=args.vit_heads,
+                              mlp_dim=args.vit_mlp_dim, dropout=args.vit_dropout)
+            name = "vit"
     else:
         raise ValueError(f"Unknown model: {args.model}")
     return model, name
@@ -109,7 +117,9 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, default=config.BATCH_SIZE)
     parser.add_argument("--num-workers", type=int, default=config.NUM_WORKERS)
     parser.add_argument("--epochs", type=int, default=config.EPOCHS)
-    parser.add_argument("--lr", type=float, default=config.LEARNING_RATE)
+    parser.add_argument("--lr", type=float, default=None,
+                        help="learning rate (default: 3e-4 for ResNet, "
+                             "1e-4 for pretrained ViT)")
     parser.add_argument("--weight-decay", type=float, default=config.WEIGHT_DECAY)
     parser.add_argument("--lr-step", type=int, default=config.LR_STEP_SIZE)
     parser.add_argument("--lr-gamma", type=float, default=config.LR_GAMMA)
@@ -122,14 +132,18 @@ def parse_args():
     parser.add_argument("--label-smoothing", type=float,
                         default=config.LABEL_SMOOTHING,
                         help="label smoothing factor for the loss")
-    parser.add_argument("--pretrained", action="store_true",
+    parser.add_argument("--pretrained", action=argparse.BooleanOptionalAction,
                         default=config.PRETRAINED,
-                        help="initialize the ResNet backbone with ImageNet "
-                             "weights (--no-pretrained to train from scratch)")
+                        help="initialize the backbone with ImageNet weights "
+                             "(--no-pretrained to train from scratch)")
     parser.add_argument("--early-stop", type=int, default=config.EARLY_STOP_PATIENCE,
                         help="early-stopping patience in epochs (0 disables it)")
 
     # ViT hyperparameters
+    parser.add_argument("--vit-variant", type=str, default=config.VIT_VARIANT,
+                        choices=["b16", "b32", "l16", "l32"],
+                        help="pretrained torchvision ViT variant "
+                             "(used when --model vit --pretrained)")
     parser.add_argument("--patch-size", type=int, default=config.VIT_PATCH_SIZE)
     parser.add_argument("--vit-dim", type=int, default=config.VIT_DIM)
     parser.add_argument("--vit-depth", type=int, default=config.VIT_DEPTH)
@@ -141,12 +155,17 @@ def parse_args():
 
 def main():
     args = parse_args()
+    if args.lr is None:
+        args.lr = (config.VIT_LEARNING_RATE
+                   if args.model == "vit" and args.pretrained
+                   else config.LEARNING_RATE)
     set_seed(args.seed)
     device = get_device(args.device)
     print(f"Using device: {device}")
 
     config.CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
     config.LOG_DIR.mkdir(parents=True, exist_ok=True)
+    
 
     train_loader, val_loader, test_loader, classes = build_loaders(
         config.DATA_DIR, img_size=args.img_size, batch_size=args.batch_size,
@@ -156,6 +175,26 @@ def main():
     print(f"Classes: {classes}")
     print(f"Train: {len(train_loader.dataset)} | "
           f"Val: {len(val_loader.dataset)} | Test: {len(test_loader.dataset)}")
+
+    # ===== 超参数打印 =====
+    print("\n" + "=" * 60)
+    print("Hyperparameters".center(60))
+    print("=" * 60)
+
+    print("\n[args]")
+    for k, v in sorted(vars(args).items()):
+        print(f"  {k:24s}: {v}")
+
+    print("\n[config]")
+    for k in sorted(dir(config)):
+        if k.startswith("_"):
+            continue
+        v = getattr(config, k)
+        if isinstance(v, (int, float, str, bool, tuple, list)) or v is None:
+            print(f"  {k:24s}: {v}")
+
+    print("=" * 60 + "\n")
+    # ====================
 
     model, model_name = build_model(args, len(classes))
     model = model.to(device)

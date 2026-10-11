@@ -38,8 +38,8 @@ BUSI_classification/
 ├── data/
 │   └── Dataset_BUSI_with_GT/   # 数据集（需自行下载放入）
 ├── models/
-│   ├── resnet.py               # ResNet18/34/50/101（从零实现）
-│   └── vit.py                  # ViT（从零实现）
+│   ├── resnet.py               # ResNet18/34/50/101（支持 ImageNet 预训练）
+│   └── vit.py                  # ViT（从零实现 + torchvision 预训练）
 ├── utils/
 │   ├── dataset.py              # 数据加载、划分、数据增强
 │   ├── metrics.py              # 准确率/精确率/召回率/F1/混淆矩阵
@@ -65,22 +65,25 @@ pip install -r requirements.txt
 
 ## 训练
 
-训练 ResNet18（默认）：
+两个模型默认都会加载 ImageNet 预训练权重。训练 ResNet18（默认）：
 
 ```bash
 python train.py --model resnet --depth 18 --epochs 50
 ```
 
-训练 ViT：
+训练预训练 ViT（默认 ViT-B/16）：
 
 ```bash
-python train.py --model vit --epochs 50
+python train.py --model vit --vit-variant b16 --epochs 50
 ```
 
-也可以训练更深的 ResNet，或针对类别不平衡使用类别权重：
+也可以训练更深的 ResNet、换其他 ViT 变体（b16/b32/l16/l32）、从零训练或关闭类别权重：
 
 ```bash
-python train.py --model resnet --depth 50 --use-class-weights
+python train.py --model resnet --depth 50
+python train.py --model vit --vit-variant l16
+python train.py --model vit --no-pretrained
+python train.py --model resnet --no-use-class-weights
 ```
 
 常用命令行参数：
@@ -89,12 +92,15 @@ python train.py --model resnet --depth 50 --use-class-weights
 | --- | --- | --- |
 | `--model` | `resnet` 或 `vit` | `resnet` |
 | `--depth` | ResNet 深度（18/34/50/101） | `18` |
+| `--vit-variant` | 预训练 ViT 变体（b16/b32/l16/l32） | `b16` |
 | `--img-size` | 输入图像尺寸 | `224` |
 | `--batch-size` | 批量大小 | `32` |
 | `--epochs` | 训练轮数 | `50` |
-| `--lr` | 学习率 | `1e-3` |
-| `--use-class-weights` | 使用类别权重缓解不平衡 | 关闭 |
-| `--early-stop` | 早停耐心值（0 关闭） | `10` |
+| `--lr` | 学习率（ResNet 3e-4，预训练 ViT 1e-4） | 按模型 |
+| `--pretrained` / `--no-pretrained` | 是否加载 ImageNet 预训练权重 | 开启 |
+| `--use-class-weights` / `--no-use-class-weights` | 是否使用类别权重 | 开启 |
+| `--label-smoothing` | 标签平滑系数 | `0.1` |
+| `--early-stop` | 早停耐心值（0 关闭） | `15` |
 | `--device` | `auto` / `cuda` / `cpu` | `auto` |
 
 其余参数（图像尺寸、ViT 结构、学习率等）见 `config.py` 和 `python train.py --help`。
@@ -106,13 +112,14 @@ python train.py --model resnet --depth 50 --use-class-weights
 ```
 outputs/
 ├── checkpoints/
-│   ├── resnet18_best.pt      # 验证集 F1 最高的权重
-│   ├── resnet18_last.pt
-│   └── vit_best.pt
+│   ├── resnet18_best.pt      # 验证集 F1 最高的权重（命名与模型对应）
+│   ├── resnet50_best.pt
+│   ├── vit_b16_best.pt       # 预训练 ViT-B/16
+│   └── vit_best.pt           # 从零实现的轻量 ViT
 └── logs/
     ├── resnet18_history.json # 每轮 loss/指标曲线数据
-    ├── resnet18_curves.png   # 训练曲线图
-    ├── resnet18_confusion.png# 测试集混淆矩阵
+    ├── vit_b16_curves.png    # 训练曲线图
+    ├── vit_b16_confusion.png # 测试集混淆矩阵
     └── ...
 ```
 
@@ -145,30 +152,30 @@ jupyter notebook
 打开 `notebooks/BUSI_classification.ipynb`，依次执行即可：
 
 1. 数据集展示（类别分布、样本图像）
-2. 构建 ResNet 与 ViT，查看参数量
-3. 加载训练好的权重
-4. 在测试集上计算并对比两个模型的 Accuracy / Precision / Recall / F1
-5. 可视化混淆矩阵、预测样例、训练曲线
+2. 自动发现 `outputs/checkpoints/` 中所有已训练的模型（各种 ResNet 深度、预训练 ViT 变体、从零实现的 ViT）
+3. 在测试集上统一评估，得到一张按 F1 排序的对比表（Accuracy / Precision / Recall / F1）
+4. 并排对比混淆矩阵、预测样例
+5. 逐个查看训练曲线
 
-> 请先完成 ResNet 和 ViT 的训练，再运行 Notebook 中"加载权重"及其后的单元。
+> Notebook 会自动扫描 `outputs/checkpoints/*_best.pt`，因此训练了哪几个模型就对比哪几个，无需手动改代码。请先完成训练，再运行"发现并加载模型"及其后的单元。
 
 ## 实现说明
 
-- **ResNet**：从零实现了 ResNet18/34/50/101（`BasicBlock` / `Bottleneck`），
-  支持任意类别数；未使用预训练权重。
-- **ViT**：从零实现（Patch Embedding + 可学习 class token + 位置编码 +
-  Transformer Encoder + MLP Head），默认是一个轻量配置
-  （patch 16、dim 256、depth 6、heads 8）。
+- **ResNet**：实现了 ResNet18/34/50/101（`BasicBlock` / `Bottleneck`），
+  支持任意类别数；默认加载 ImageNet 预训练权重，也可用 `--no-pretrained` 从零训练。
+- **ViT**：提供两套实现——从零实现的轻量 ViT（Patch Embedding + 可学习 class token +
+  位置编码 + Transformer Encoder + MLP Head），以及 torchvision 预训练 ViT
+  （b16/b32/l16/l32，默认 b16）；`--no-pretrained` 切换为从零实现。
 - **数据划分**：按类别分层划分 70% / 15% / 15%（train / val / test），
   保证各类比例一致。
 - **指标**：每个 epoch 计算并记录损失、Accuracy、macro Precision / Recall / F1，
   以及测试集混淆矩阵。
-- **公平对比**：两个模型使用相同的划分、数据增强、优化器和训练流程。
+- **公平对比**：不同模型使用相同的划分、数据增强、优化器和训练流程。
 
 ## 备注
 
-- BUSI 数据集存在类别不平衡，若想让小类有更好的召回率，建议加上
-  `--use-class-weights`。
+- BUSI 数据集存在类别不平衡，类别权重默认已开启（`--use-class-weights`），
+  有助于提升小类的召回率；可用 `--no-use-class-weights` 关闭。
 - 小数据量下，ResNet 依靠卷积的归纳偏置通常更容易收敛；ViT 通常需要更多数据
   或更强数据增强才能充分发挥，实际结论以本地训练结果为准。
 
