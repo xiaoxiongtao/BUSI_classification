@@ -49,6 +49,7 @@ Thumbs.db
 *.ipynb_checkpoints*
 
 # ---- 本项目：数据集（需自行下载，勿提交）----
+data/
 data/Dataset_BUSI_with_GT/
 
 # ---- 本项目：训练/评估输出（权重、日志、图表）----
