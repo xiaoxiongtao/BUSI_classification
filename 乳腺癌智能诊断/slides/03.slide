@@ -1,0 +1,49 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <svg width={1280} height={720} viewBox='0 0 1280 720' style={{ position: 'absolute', top: 0, left: 0, opacity: 0.16 }}>
+        <path d='M760 250 Q 880 180 1000 250 T 1240 250' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M760 320 Q 880 250 1000 320 T 1240 320' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M760 390 Q 880 320 1000 390 T 1240 390' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M760 460 Q 880 390 1000 460 T 1240 460' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M760 530 Q 880 460 1000 530 T 1240 530' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+    </svg>
+    <Box style={{ width: '100%', height: '100%', paddingTop: 84, paddingLeft: 72, paddingRight: 72, paddingBottom: 72, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 40 }}>
+            <Text style={{ fontSize: 200, fontWeight: 'bold', color: '#3D7BD9', lineHeight: 1 }}>
+                01
+            </Text>
+            <Box style={{ width: 3, height: 150, background: 'rgba(255,255,255,0.35)' }} />
+            <Box style={{ gap: 14 }}>
+                <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3 }}>
+                    临床背景与数据
+                </Text>
+                <Text style={{ fontFamily: 'Times New Roman', fontSize: 21, color: '#8FC0F0', letterSpacing: 1 }}>
+                    Clinical Motivation and the BUSI Dataset
+                </Text>
+                <Text style={{ fontSize: 21, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    为什么乳腺超声需要 AI 辅助？我们手上这份数据到底长什么样？
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 24 }}>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>乳腺癌筛查现状</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    超声无辐射、成本低，是致密型乳腺的首选筛查手段，但读片高度依赖医生经验。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>BUSI 数据集</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    780 张真实乳腺超声图，含良性 437、恶性 210、正常 133，类别严重不均衡。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>任务与指标</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    定义为三分类图像识别，评价指标必须区分漏诊与误诊的临床代价。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

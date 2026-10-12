@@ -1,0 +1,68 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>数据预处理与增强</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>02 技术路线与数据处理</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 26, paddingTop: 22, paddingLeft: 40, paddingRight: 40, paddingBottom: 22 }}>
+        <Box style={{ width: 520, gap: 10 }}>
+            <Image src="assets/augment_preview.png" style={{ width: 520, height: 368, objectFit: 'cover', borderRadius: 10, border: '1px solid #D6DCE5' }} />
+            <Text style={{ fontSize: 15, color: '#8B97A8', lineHeight: 1.5 }}>
+                图：同一张恶性超声图在训练集上经过随机增强后的样子（每次 epoch 随机重采样）
+            </Text>
+            <Box style={{ background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>归一化用 ImageNet 统计量</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    mean = [0.485, 0.456, 0.406]，std = [0.229, 0.224, 0.225]——与预训练权重的输入分布保持一致。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 18, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 25, height: 25 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>引导问题：780 张图不够，怎么"造"出多样性？</Text>
+            </Box>
+
+            <CodeBlock
+                code={`train_transform = transforms.Compose([
+    transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomVerticalFlip(p=0.3),
+    transforms.RandomRotation(degrees=20),
+    transforms.ColorJitter(brightness=0.3, contrast=0.3),
+    transforms.ToTensor(),
+    transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+])
+
+eval_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+])`}
+                language='python'
+                width={620}
+                fontSize={12}
+                theme='github-light'
+            />
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>每一种增强都在对抗一种过拟合</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    随机裁剪缩放让模型不依赖病灶的绝对位置；翻转与旋转对应超声探头角度的变化；色彩抖动模拟不同设备与增益设置下的灰阶差异。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#D9534F', lineHeight: 1.55, fontWeight: 'bold' }}>
+                    关键点：增强只作用于训练集，验证集与测试集只做缩放与归一化。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>09 / 38</Text>
+    </Box>
+</Slide>

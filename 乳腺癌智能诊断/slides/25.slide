@@ -1,0 +1,116 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>类别不平衡与加权交叉熵</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>05 损失函数与优化策略</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 690, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>544 张训练图里，正常类只有 93 张——损失该怎么改？</Text>
+            </Box>
+
+            <Chart
+                style={{ height: 236 }}
+                chartType='barChart'
+                barDirection='bar'
+                grouping='clustered'
+                title='训练集各类别样本数（分层划分后）'
+                titleColor='#0E3F8C'
+                showLegend={false}
+                showDataLabels={true}
+                axisColor='#8B97A8'
+                dataLabelColor='#1A2230'
+                colors={['#3D7BD9', '#D9534F', '#8B97A8']}
+                background='#FFFFFF'
+                data={[
+                    ['类别', '训练样本数'],
+                    ['良性 benign', 305],
+                    ['恶性 malignant', 146],
+                    ['正常 normal', 93],
+                ]}
+            />
+
+            <Table
+                style={{ width: '100%', height: 214 }}
+                defaultTextStyle={{ fontSize: 17, textAlign: 'center', color: '#1A2230' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '类别', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '训练样本数 n', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '1 / n（未归一）', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '类别权重 w', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '相对良性的倍数', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '良性 benign', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '305', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.00328', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.471', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '1.00 ×', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        { text: '恶性 malignant', textStyle: { bold: true, color: '#B03430' }, cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '146', cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.00685', cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.984', textStyle: { bold: true, color: '#D9534F' }, cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '2.09 ×', cellStyle: { background: { color: '#FDECEC' } } },
+                    ],
+                    [
+                        { text: '正常 normal', textStyle: { bold: true }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '93', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '0.01075', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '1.545', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '3.28 ×', cellStyle: { background: { color: '#FFF8E1' } } },
+                    ],
+                ]}
+            />
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 14, alignItems: 'center', gap: 6 }}>
+                <Text style={{ fontSize: 18, color: '#8FC0F0' }}>加权交叉熵</Text>
+                <Math latex='L = -\,w_{y}\,\log p_{y},\qquad w_k \propto \frac{1}{n_k}' width={330} color='#FFFFFF' />
+                <Text style={{ fontSize: 15, color: '#CFE0F7', textAlign: 'center', lineHeight: 1.5 }}>
+                    归一化后再乘类别数，使权重均值为 1
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>不加权重会发生什么</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    良性贡献了 56% 的梯度，模型会发现"多猜良性"最省事，恶性召回率被压低——筛查场景最不能接受的结果。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>加权后的实测效果</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    ResNet-50 对恶性类的召回率达 87.5%、特异度 96.5%，与样本最多的良性类（召回 92.4%）差距明显缩小。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>一个容易踩的坑</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    开启类别权重时，标签平滑会被覆盖（PyTorch 两条分支互斥）。想同时用需自定义损失。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>25 / 38</Text>
+    </Box>
+</Slide>

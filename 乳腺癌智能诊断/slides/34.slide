@@ -1,0 +1,49 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <svg width={1280} height={720} viewBox='0 0 1280 720' style={{ position: 'absolute', top: 0, left: 0, opacity: 0.18 }}>
+        <rect x='800' y='200' width='440' height='380' rx='10' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M800 250 H 1240' stroke='#8FC0F0' strokeWidth='2' />
+        <path d='M830 300 H 940 M830 350 H 1030 M830 400 H 900 M830 450 H 1080 M830 500 H 980' stroke='#8FC0F0' strokeWidth='6' />
+        <path d='M830 550 H 900' stroke='#FFC107' strokeWidth='6' />
+        <rect x='920' y='542' width='16' height='22' fill='#FFC107' />
+    </svg>
+    <Box style={{ width: '100%', height: '100%', paddingTop: 84, paddingLeft: 72, paddingRight: 72, paddingBottom: 72, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 40 }}>
+            <Text style={{ fontSize: 200, fontWeight: 'bold', color: '#3D7BD9', lineHeight: 1 }}>
+                07
+            </Text>
+            <Box style={{ width: 3, height: 150, background: 'rgba(255,255,255,0.35)' }} />
+            <Box style={{ gap: 14 }}>
+                <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3 }}>
+                    课堂实战任务
+                </Text>
+                <Text style={{ fontFamily: 'Times New Roman', fontSize: 21, color: '#8FC0F0', letterSpacing: 1 }}>
+                    Hands-on Lab Task
+                </Text>
+                <Text style={{ fontSize: 21, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    一条命令跑通训练，三个验收点检验理解、动手与分析。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 24 }}>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>任务书</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    训练 ResNet18 并在测试集评估，复现约 87% 准确率与 0.867 macro-F1。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>验收点</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    跑通结果、读懂混淆矩阵与各类别差异、说清一个超参的影响。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>拓展挑战</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    调参、换架构、做可解释性可视化，三条路径对应三档能力。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

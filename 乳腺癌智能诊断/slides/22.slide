@@ -1,0 +1,135 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>Encoder Block 结构与 ViT 变体</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>04 ViT：视觉 Transformer</Text>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 620, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 8, alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={580} height={470} viewBox='0 0 580 470'>
+                <text x='290' y='22' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Transformer Encoder Block（Pre-Norm 结构）</text>
+
+                <text x='34' y='72' fill='#1E4FA8' font-size='22' font-weight='bold' font-family='Microsoft YaHei'>x</text>
+                <path d='M48 64 H 96' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M88 58 L 98 64 L 88 70' fill='#1E4FA8' />
+
+                <rect x='98' y='44' width='170' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='183' y='73' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Layer Norm</text>
+
+                <path d='M268 67 H 296' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M288 61 L 298 67 L 288 73' fill='#1E4FA8' />
+
+                <rect x='298' y='44' width='220' height='46' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='408' y='73' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Multi-Head Self-Attention</text>
+
+                <path d='M408 90 V 150 H 408' stroke='#D9534F' strokeWidth='0' />
+                <path d='M350 90 V 150 H 130 V 96' fill='none' stroke='#D9534F' strokeWidth='3' />
+                <path d='M124 108 L 130 92 L 136 108' fill='#D9534F' />
+
+                <circle cx='408' cy='150' r='22' fill='#FFFFFF' stroke='#D9534F' strokeWidth='3' />
+                <text x='408' y='159' fill='#D9534F' font-size='26' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                <path d='M430 150 H 470' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M462 144 L 472 150 L 462 156' fill='#1E4FA8' />
+
+                <rect x='470' y='128' width='94' height='44' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='517' y='156' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>中间态</text>
+
+                <path d='M517 172 V 200 H 183 V 222' fill='none' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M177 210 L 183 220 L 189 210' fill='#1E4FA8' />
+
+                <rect x='98' y='224' width='170' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='183' y='253' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Layer Norm</text>
+
+                <path d='M268 247 H 296' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M288 241 L 298 247 L 288 253' fill='#1E4FA8' />
+
+                <rect x='298' y='224' width='220' height='46' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='408' y='253' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>MLP：D → 4D → D</text>
+
+                <path d='M350 270 V 320 H 130 V 276' fill='none' stroke='#D9534F' strokeWidth='3' />
+                <path d='M124 288 L 130 272 L 136 288' fill='#D9534F' />
+
+                <circle cx='408' cy='320' r='22' fill='#FFFFFF' stroke='#D9534F' strokeWidth='3' />
+                <text x='408' y='329' fill='#D9534F' font-size='26' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                <path d='M430 320 H 480' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M472 314 L 482 320 L 472 326' fill='#1E4FA8' />
+                <text x='520' y='327' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>输出</text>
+
+                <rect x='60' y='366' width='460' height='80' rx='8' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='1' />
+                <text x='290' y='392' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>两条残差支路：x′ = x + MSA(LN(x))，y = x′ + MLP(LN(x′))</text>
+                <text x='290' y='414' fill='#1E4FA8' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Pre-Norm（先归一化再进子层）比 Post-Norm 更容易训练深层</text>
+                <text x='290' y='434' fill='#8B97A8' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>MLP 用 GELU 激活 + Dropout，扩展倍数为 4（768 → 3072 → 768）</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>同一个骨架，四种规格</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 250 }}
+                defaultTextStyle={{ fontSize: 16, textAlign: 'center', color: '#1A2230' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '变体', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '隐藏维 D', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '层数 L', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '头数', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '参数量', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: 'ViT-B/16', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        '768', '12', '12', '85.8 M',
+                    ],
+                    [
+                        'ViT-B/32', '768', '12', '12', '约 88 M',
+                    ],
+                    [
+                        { text: 'ViT-L/16', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        '1024', '24', '16', '约 304 M',
+                    ],
+                    [
+                        'ViT-L/32', '1024', '24', '16', '约 306 M',
+                    ],
+                    [
+                        { text: '从零轻量版', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '256', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '6', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '8', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '3.4 M', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>patch 大小决定序列长度</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    16×16 把 224 图切成 196 块，32×32 只切 49 块。块越大序列越短、算力越省，但细节损失越多——医学影像上细粒度纹理恰恰是判别依据。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10, marginTop: 'auto' }}>
+                    <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold' }}>本项目选择：</span>预训练 ViT-B/16（85.8 M）作为主力，另加一个从零实现的轻量版（3.4 M）做对照。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>22 / 38</Text>
+    </Box>
+</Slide>

@@ -1,0 +1,51 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        <Image src="assets/cover_ultrasound.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    </Box>
+    <Box style={{
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        background: 'linear-gradient(90deg, rgba(10,38,86,0.96) 0%, rgba(12,47,105,0.86) 42%, rgba(16,60,128,0.42) 78%, rgba(20,70,140,0.28) 100%)',
+    }} />
+    <Box style={{
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        paddingTop: 72, paddingLeft: 72, paddingRight: 72, paddingBottom: 64,
+        justifyContent: 'space-between',
+    }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 30, background: '#FFC107' }} />
+            <Text style={{ fontSize: 22, color: '#CFE0F7', letterSpacing: 2 }}>
+                深度学习与医学影像分析 · 课程课件
+            </Text>
+        </Box>
+
+        <Box style={{ gap: 22, maxWidth: 860 }}>
+            <Text style={{ fontSize: 78, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 4, lineHeight: 1.1 }}>
+                乳腺癌智能诊断
+            </Text>
+            <Text style={{
+                fontFamily: 'Times New Roman', fontSize: 25, color: '#8FC0F0',
+                lineHeight: 1.45, letterSpacing: 0.5,
+            }}>
+                Intelligent Breast Cancer Diagnosis: ResNet versus Vision Transformer on the BUSI Ultrasound Dataset
+            </Text>
+            <Box style={{ width: 128, height: 5, background: '#3D7BD9' }} />
+            <Text style={{ fontSize: 25, color: '#E3EDFA', lineHeight: 1.5 }}>
+                基于乳腺超声图像的三分类任务 · 780 张影像 · 6 个模型对比实验
+            </Text>
+        </Box>
+
+        <Box style={{
+            flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between',
+            borderTop: '1px solid rgba(255,255,255,0.25)', paddingTop: 20,
+        }}>
+            <Box style={{ gap: 6 }}>
+                <Text style={{ fontSize: 20, color: '#FFFFFF', fontWeight: 'bold' }}>主讲：肖雄涛</Text>
+                <Text style={{ fontSize: 16, color: '#A9C4E8' }}>PyTorch 实现 · ResNet / ViT · 分层划分与类别加权</Text>
+            </Box>
+            <Box style={{ alignItems: 'flex-end', gap: 6 }}>
+                <Text style={{ fontSize: 20, color: '#FFFFFF', fontWeight: 'bold' }}>BUSI 乳腺超声图像分类项目</Text>
+                <Text style={{ fontSize: 16, color: '#A9C4E8' }}>Breast Ultrasound Images Dataset</Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

@@ -1,0 +1,80 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>整体技术路线：从一张图到一个诊断</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>02 技术路线与数据处理</Text>
+    </Box>
+
+    <Box style={{ flex: 1, gap: 12, paddingTop: 22, paddingLeft: 40, paddingRight: 40, paddingBottom: 22 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 18, paddingTop: 9, paddingBottom: 9 }}>
+            <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 25, height: 25 }} />
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>引导问题：要让 ResNet 与 ViT 的比拼公平，哪些环节必须完全一致？</Text>
+        </Box>
+
+        <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, paddingTop: 8, paddingBottom: 8, alignItems: 'center' }}>
+            <svg width={1150} height={255} viewBox='0 0 1150 255'>
+                <rect x='14' y='30' width='140' height='80' rx='10' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='84' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>① 读图与清洗</text>
+                <text x='84' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>忽略 _mask 掩膜</text>
+
+                <rect x='176' y='30' width='140' height='80' rx='10' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='246' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>② 分层划分</text>
+                <text x='246' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>70 / 15 / 15</text>
+
+                <rect x='338' y='30' width='140' height='80' rx='10' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='408' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>③ 数据增强</text>
+                <text x='408' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>裁剪翻转旋转抖动</text>
+
+                <rect x='500' y='30' width='140' height='80' rx='10' fill='#0E3F8C' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='570' y='62' fill='#FFFFFF' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>④ 前向传播</text>
+                <text x='570' y='88' fill='#CFE0F7' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>ResNet / ViT</text>
+
+                <rect x='662' y='30' width='140' height='80' rx='10' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='732' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>⑤ 计算损失</text>
+                <text x='732' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>加权交叉熵</text>
+
+                <rect x='824' y='30' width='140' height='80' rx='10' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='894' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>⑥ 反向更新</text>
+                <text x='894' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>AdamW</text>
+
+                <rect x='986' y='30' width='140' height='80' rx='10' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='1056' y='62' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>⑦ 验证与早停</text>
+                <text x='1056' y='88' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>按 macro-F1</text>
+
+                <path d='M154 70 H 176' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M316 70 H 338' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M478 70 H 500' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M640 70 H 662' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M802 70 H 824' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M964 70 H 986' stroke='#1E4FA8' strokeWidth='2' />
+
+                <path d='M1056 110 V 190 H 570 V 110' fill='none' stroke='#D9534F' strokeWidth='2' strokeDasharray='7 5' />
+                <path d='M564 122 L 570 110 L 576 122' fill='#D9534F' />
+                <text x='812' y='212' fill='#D9534F' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>④ → ⑦ 每个 epoch 循环一次，最多 50 轮</text>
+                <text x='812' y='238' fill='#8B97A8' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>数据侧 ① ② ③ 只做一次；训练侧 ④ ⑤ ⑥ ⑦ 反复迭代</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 16 }}>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #1E4FA8', borderRadius: 8, padding: 16, gap: 8 }}>
+                <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#0E3F8C' }}>数据侧：一次性准备，全程固定</Text>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>
+                    按类别分层划分 70% / 15% / 15%，随机种子固定为 42，保证每个模型看到的训练集、验证集、测试集完全相同。测试集只在最后用一次。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #FFC107', borderRadius: 8, padding: 16, gap: 8 }}>
+                <Text style={{ fontSize: 23, fontWeight: 'bold', color: '#0E3F8C' }}>模型侧：唯一变量是第 ④ 步</Text>
+                <Text style={{ fontSize: 18, color: '#4A5568', lineHeight: 1.6 }}>
+                    损失、优化器、学习率调度、早停策略全部一致，因此两个模型最终的成绩差异，只能归因于网络结构本身对医学小样本的适配能力。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>08 / 38</Text>
+    </Box>
+</Slide>

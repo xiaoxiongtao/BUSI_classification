@@ -1,0 +1,97 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>标签平滑与优化调度</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>05 损失函数与优化策略</Text>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 372, gap: 12 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 18, gap: 8 }}>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#FFFFFF' }}>标签平滑 ε = 0.1</Text>
+                <Math latex='y_k^{\prime}=(1-\varepsilon)\,y_k+\frac{\varepsilon}{K}' width={300} color='#FFFFFF' />
+                <Text style={{ fontSize: 17, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    硬标签 [0, 1, 0] 变成软标签 [0.033, 0.933, 0.033]。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 16, gap: 8 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>为什么不要"非黑即白"</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    硬标签逼着模型把真实类的概率推到 1，而交叉熵在 p→1 时梯度极陡，容易记住训练样本的细节噪声。
+                </Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    留出 10% 的"不确定性"给其他类，等价于给输出分布加了个下界，模型的校准性更好。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10, marginTop: 'auto' }}>
+                    <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold' }}>提醒：</span>ε 不宜过大，0.05～0.1 是常用区间。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>优化器决定了"怎么改"，调度器决定了"改多快"</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 300 }}
+                defaultTextStyle={{ fontSize: 17, textAlign: 'left', color: '#1A2230' }}
+                defaultCellStyle={{
+                    paddingLeft: 16,
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '组件', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '本项目取值', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '它在解决什么问题', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '优化器', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: 'AdamW（β₁=0.9, β₂=0.999）', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '自适应步长；把权重衰减从梯度里解耦，泛化优于 Adam', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '初始学习率', 'ResNet 3e-4 / 预训练 ViT 1e-4', 'ViT 用 3e-4 会训练震荡，必须调小',
+                    ],
+                    [
+                        { text: '调度器', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: 'StepLR（step=15, γ=0.1）', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '3e-4 → 3e-5 → 3e-6 → 3e-7，先粗调后精修', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '权重衰减', '1e-4', '对大参数施加惩罚，抑制过拟合',
+                    ],
+                    [
+                        { text: '早停', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: 'patience = 15，判据 macro-F1', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '验证集连续 15 轮不涨就停，回滚最优权重', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        'Dropout', 'ViT 中 0.1', '随机失活一部分连接，防止共适应',
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFF8E1', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.55 }}>
+                    <span style={{ fontWeight: 'bold' }}>判断：</span>这些技巧单独看都不起眼，但叠加起来构成了小样本训练的"安全带"。本实验里最能救命的一条是<span style={{ fontWeight: 'bold', color: '#D9534F' }}>早停</span>——6 个模型没有一个跑满 50 轮却仍未收敛，说明它们都在中途就撞上了过拟合。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>26 / 38</Text>
+    </Box>
+</Slide>

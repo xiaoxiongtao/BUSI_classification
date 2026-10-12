@@ -1,0 +1,52 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <svg width={1280} height={720} viewBox='0 0 1280 720' style={{ position: 'absolute', top: 0, left: 0, opacity: 0.16 }}>
+        <rect x='820' y='230' width='120' height='120' rx='10' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <rect x='980' y='230' width='120' height='120' rx='10' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <rect x='1140' y='230' width='120' height='120' rx='10' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M940 290 H 980' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M1100 290 H 1140' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M880 350 V 420 H 1040 V 350' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M1040 290 V 420' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <rect x='820' y='420' width='440' height='100' rx='10' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+    </svg>
+    <Box style={{ width: '100%', height: '100%', paddingTop: 84, paddingLeft: 72, paddingRight: 72, paddingBottom: 72, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 40 }}>
+            <Text style={{ fontSize: 200, fontWeight: 'bold', color: '#3D7BD9', lineHeight: 1 }}>
+                02
+            </Text>
+            <Box style={{ width: 3, height: 150, background: 'rgba(255,255,255,0.35)' }} />
+            <Box style={{ gap: 14 }}>
+                <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3 }}>
+                    技术路线与数据处理
+                </Text>
+                <Text style={{ fontFamily: 'Times New Roman', fontSize: 21, color: '#8FC0F0', letterSpacing: 1 }}>
+                    Pipeline, Preprocessing and Training Protocol
+                </Text>
+                <Text style={{ fontSize: 21, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    两条主干网络共用同一条流水线，才能保证"架构差异"是唯一变量。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 24 }}>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>七步流水线</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    读图 → 分层划分 → 增强 → 前向 → 算损失 → 反向 → 监控早停，全程可复现。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>数据增强</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    随机裁剪、水平/垂直翻转、旋转、色彩抖动，用人工多样性弥补样本量不足。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>训练协议</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    AdamW + StepLR + 类别权重 + 早停 15 轮，六个模型完全同参。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

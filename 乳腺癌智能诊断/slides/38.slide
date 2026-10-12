@@ -1,0 +1,68 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        <Image src="assets/cover_ultrasound.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    </Box>
+    <Box style={{
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        background: 'linear-gradient(90deg, rgba(8,32,74,0.97) 0%, rgba(10,38,86,0.93) 38%, rgba(14,58,124,0.74) 72%, rgba(20,70,140,0.45) 100%)',
+    }} />
+
+    <Box style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', paddingTop: 66, paddingLeft: 72, paddingRight: 72, paddingBottom: 56, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 30, background: '#FFC107' }} />
+            <Text style={{ fontSize: 23, color: '#CFE0F7', letterSpacing: 2 }}>总结与参考文献</Text>
+            <Text style={{ fontFamily: 'Times New Roman', fontSize: 19, color: '#7FA9DC', letterSpacing: 1 }}>Conclusions and References</Text>
+        </Box>
+
+        <Box style={{ gap: 26, maxWidth: 900 }}>
+            <Text style={{ fontSize: 52, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3, lineHeight: 1.15 }}>
+                架构决定上限，数据决定高度
+            </Text>
+
+            <Box style={{ gap: 16 }}>
+                <Box style={{ flexDirection: 'row', gap: 14, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 10, height: 10, background: '#FFC107', marginTop: 9 }} />
+                    <Text style={{ flex: 1, fontSize: 21, color: '#E3EDFA', lineHeight: 1.55 }}>
+                        残差连接让深层网络真正可训练：<span style={{ fontWeight: 'bold', color: '#FFC107' }}>ResNet-50</span> 以 23.5 M 参数在测试集上取得 89.8% 准确率与 0.890 macro-F1。
+                    </Text>
+                </Box>
+                <Box style={{ flexDirection: 'row', gap: 14, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 10, height: 10, background: '#FFC107', marginTop: 9 }} />
+                    <Text style={{ flex: 1, fontSize: 21, color: '#E3EDFA', lineHeight: 1.55 }}>
+                        ViT 把图像切成 16×16 的序列交给注意力，却因缺少归纳偏置而在 780 张数据上停摆：两个 ViT 变体均为 <span style={{ fontWeight: 'bold', color: '#FFC107' }}>53.4%</span>。
+                    </Text>
+                </Box>
+                <Box style={{ flexDirection: 'row', gap: 14, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 10, height: 10, background: '#FFC107', marginTop: 9 }} />
+                    <Text style={{ flex: 1, fontSize: 21, color: '#E3EDFA', lineHeight: 1.55 }}>
+                        医学影像任务中，<span style={{ fontWeight: 'bold', color: '#FFFFFF' }}>先选对归纳偏置，再谈模型规模</span>；类别加权与召回率，比单看准确率更贴近临床代价。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+
+        <Box style={{ gap: 10, maxWidth: 960, borderTop: '1px solid rgba(255,255,255,0.22)', paddingTop: 16 }}>
+            <Text style={{ fontSize: 15, color: '#8FC0F0', letterSpacing: 1 }}>参考文献</Text>
+            <Text style={{ fontSize: 14, color: '#B9CFEA', lineHeight: 1.55 }}>
+                [1] He K, Zhang X, Ren S, Sun J. Deep Residual Learning for Image Recognition. CVPR 2016.（arXiv:1512.03385）
+            </Text>
+            <Text style={{ fontSize: 14, color: '#B9CFEA', lineHeight: 1.55 }}>
+                [2] Dosovitskiy A, Beyer L, Kolesnikov A, et al. An Image is Worth 16×16 Words: Transformers for Image Recognition at Scale. ICLR 2021.（arXiv:2010.11929）
+            </Text>
+            <Text style={{ fontSize: 14, color: '#B9CFEA', lineHeight: 1.55 }}>
+                [3] Al-Dhabyani W, Gomaa M, Khaled H, Fahmy A. Dataset of Breast Ultrasound Images. Data in Brief, 2020, 28: 104863.
+            </Text>
+            <Text style={{ fontSize: 14, color: '#B9CFEA', lineHeight: 1.55 }}>
+                [4] Paszke A, Gross S, Massa F, et al. PyTorch: An Imperative Style, High-Performance Deep Learning Library. NeurIPS 2019.
+            </Text>
+            <Text style={{ fontSize: 14, color: '#B9CFEA', lineHeight: 1.55 }}>
+                [5] torchvision 官方模型库与 ImageNet-1K 预训练权重文档（PyTorch 官方文档）。
+            </Text>
+        </Box>
+    </Box>
+
+    <Box style={{ position: 'absolute', right: 72, bottom: 56, alignItems: 'flex-end', gap: 4 }}>
+        <Text style={{ fontSize: 19, color: '#FFFFFF', fontWeight: 'bold' }}>谢谢 · 欢迎提问</Text>
+        <Text style={{ fontSize: 15, color: '#8FC0F0' }}>主讲：肖雄涛</Text>
+    </Box>
+</Slide>

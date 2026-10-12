@@ -1,0 +1,115 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>结论与改进方向</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>06 实验结果与分析</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 372, gap: 10 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 12, gap: 6 }}>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#FFFFFF' }}>三条可带走的结论</Text>
+                <Text style={{ fontSize: 17, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    从本次 6 个模型的对照实验中得到
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 12, gap: 6 }}>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 30, height: 30, background: '#1E4FA8', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>1</Text>
+                    </Box>
+                    <Text style={{ flex: 1, fontSize: 18, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1.5 }}>
+                        小样本医学影像，优先选带归纳偏置的 CNN
+                    </Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    ResNet-50 以 23.5 M 参数拿到 89.8%；参数量 3.6 倍于它的 ViT-B/16 只有 53.4%。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 12, gap: 6 }}>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 30, height: 30, background: '#1E4FA8', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>2</Text>
+                    </Box>
+                    <Text style={{ flex: 1, fontSize: 18, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1.5 }}>
+                        深度不是越深越好，要与数据量匹配
+                    </Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    ResNet-101（42.5 M）反而不如 ResNet-50，更早的 ResNet-18 也接近 90%——容量过剩只会加速过拟合。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 12, gap: 6 }}>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Box style={{ width: 30, height: 30, background: '#1E4FA8', borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#FFFFFF' }}>3</Text>
+                    </Box>
+                    <Text style={{ flex: 1, fontSize: 18, fontWeight: 'bold', color: '#0E3F8C', lineHeight: 1.5 }}>
+                        指标的选择就是临床立场的选择
+                    </Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    以 macro-F1 选模 + 类别加权，换来了恶性召回 87.5%、特异度 96.5%，这正是筛查场景想要的形状。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>下一步怎么做：四条改进路径</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 292 }}
+                defaultTextStyle={{ fontSize: 16, textAlign: 'left', color: '#1A2230' }}
+                defaultCellStyle={{
+                    paddingLeft: 14,
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '路径', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '具体做法', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '预期收益', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '数据侧', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '五折交叉验证；合并其他公开乳腺超声数据集；规范化的采集协议', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '降低 118 张测试集带来的方差，结论更稳', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '训练侧', '更强增强（RandAugment / MixUp）；冻结骨干做两阶段微调；更大 batch 与更长预热', '在不增加数据的前提下继续压低过拟合',
+                    ],
+                    [
+                        { text: '模型侧', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '混合架构（Swin / ConvNeXt / DeiT）；ResNet 与 ViT 集成投票', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '兼顾局部先验与全局建模，取两者之长', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '临床侧', '用 Grad-CAM 生成热力图；按临床需求调决策阈值，把恶性召回进一步推高', '让医生看得见依据，也让模型适配筛查流程',
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFF8E1', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.55 }}>
+                    <span style={{ fontWeight: 'bold' }}>最后一句提醒：</span>本项目是教学与科研用途的对照实验，<span style={{ fontWeight: 'bold', color: '#D9534F' }}>不能作为真实临床诊断依据</span>。任何走向临床的模型都需要多中心数据、前瞻性验证与医疗器械审批。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>33 / 38</Text>
+    </Box>
+</Slide>

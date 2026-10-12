@@ -1,0 +1,70 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>训练曲线对比：一条收敛，一条挣扎</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>06 实验结果与分析</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 22, paddingTop: 18, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ width: 660, gap: 8 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 8, paddingBottom: 8 }}>
+                <Box style={{ width: 10, height: 10, background: '#1E4FA8', borderRadius: 5 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>ResNet-50：训练损失与验证损失同步下降</Text>
+            </Box>
+            <Image src="assets/curves_resnet50.png" style={{ width: 606, height: 338, borderRadius: 8, border: '1px solid #D6DCE5' }} />
+            <Text style={{ fontSize: 15, color: '#8B97A8' }}>
+                图：ResNet-50 的 loss / Accuracy / Precision / Recall / F1 训练曲线
+            </Text>
+            <Box style={{ flexDirection: 'row', gap: 12 }}>
+                <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 12, alignItems: 'center', gap: 2 }}>
+                    <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#1E4FA8' }}>34</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568' }}>最佳轮次</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 12, alignItems: 'center', gap: 2 }}>
+                    <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#1E4FA8' }}>0.911</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568' }}>验证集 macro-F1</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderRadius: 8, padding: 12, alignItems: 'center', gap: 2 }}>
+                    <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#1E4FA8' }}>0.34</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568' }}>测试集平均损失</Text>
+                </Box>
+                <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderRadius: 8, padding: 12, alignItems: 'center', gap: 2 }}>
+                    <Text style={{ fontSize: 34, fontWeight: 'bold', color: '#0E3F8C' }}>49</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568' }}>触发早停轮次</Text>
+                </Box>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 8 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 10, background: '#FDECEC', borderRadius: 8, paddingLeft: 16, paddingTop: 8, paddingBottom: 8 }}>
+                <Box style={{ width: 10, height: 10, background: '#D9534F', borderRadius: 5 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#B03430' }}>ViT-B/16：验证损失始终高于训练损失</Text>
+            </Box>
+            <Image src="assets/curves_vit_b16.png" style={{ width: 410, height: 229, borderRadius: 8, border: '1px solid #F5C6C4' }} />
+            <Text style={{ fontSize: 15, color: '#8B97A8' }}>
+                图：ViT-B/16 的训练曲线，第 32 轮触发早停
+            </Text>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>怎么读这两张图</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    ResNet-50 的训练与验证曲线贴合，学到的规律能迁移到未见样本；ViT-B/16 训练损失一路下降，验证损失却在高位徘徊——典型的<span style={{ fontWeight: 'bold', color: '#D9534F' }}>泛化鸿沟</span>。
+                </Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    更早触发早停（第 32 轮）也从侧面印证：验证指标很早就停止改善。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10, marginTop: 'auto' }}>
+                    <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold' }}>判断：</span>曲线形状比最终数字更早暴露问题。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>31 / 38</Text>
+    </Box>
+</Slide>

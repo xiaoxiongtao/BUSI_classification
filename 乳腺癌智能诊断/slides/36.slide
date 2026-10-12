@@ -1,0 +1,110 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>判分标准与提交物</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>07 课堂实战任务</Text>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ width: 372, gap: 14 }}>
+            <Box style={{ height: 150, background: '#0E3F8C', borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingLeft: 24, paddingRight: 20, gap: 16 }}>
+                <Text style={{ fontSize: 96, fontWeight: 'bold', color: '#FFC107', lineHeight: 1 }}>100</Text>
+                <Box style={{ gap: 6 }}>
+                    <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#FFFFFF' }}>总分</Text>
+                    <Text style={{ fontSize: 16, color: '#CFE0F7', lineHeight: 1.5 }}>
+                        结果 40 · 分析 30<br />代码 20 · 表达 10
+                    </Text>
+                </Box>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderTop: '4px solid #1E4FA8', borderRadius: 8, padding: 16, gap: 10 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>三项提交物</Text>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFC107' }}>01</Text>
+                    <Box style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>最佳权重文件</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>outputs/checkpoints/resnet18_best.pt</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFC107' }}>02</Text>
+                    <Box style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>测试集评估报告</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>混淆矩阵 + 分类报告（JSON 或截图）</Text>
+                    </Box>
+                </Box>
+                <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start' }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#FFC107' }}>03</Text>
+                    <Box style={{ flex: 1 }}>
+                        <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#1A2230' }}>一页分析说明</Text>
+                        <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>说清做了什么、看到什么、为什么</Text>
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box style={{ background: '#FFF8E1', borderLeft: '5px solid #FFC107', borderRadius: 6, padding: 12 }}>
+                <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                    三组提交物缺一项，该维度按零分计；<span style={{ fontWeight: 'bold' }}>随机种子必须固定为 42</span>，否则结果无法与他人对照。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Table
+                style={{ width: '100%', height: 400 }}
+                defaultTextStyle={{ fontSize: 16, textAlign: 'center', color: '#1A2230' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '评分维度', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '权重', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '看什么（得分要点）', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '常见失分', textStyle: { bold: true, color: '#FFFFFF', fontSize: 17 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '结果复现', textStyle: { bold: true, color: '#0E3F8C', fontSize: 17 }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '40 分', textStyle: { bold: true, color: '#0E3F8C', fontSize: 20 }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '训练跑通，给出测试集 Accuracy 与 macro-F1，数值落在基线 ±5 个百分点内', textStyle: { textAlign: 'left' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '只报训练集指标，或从未在测试集上评估', textStyle: { textAlign: 'left' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    ],
+                    [
+                        '分析深度', '30 分', '正确读出混淆矩阵，指出恶性召回率与误判去向，并解释一个超参的影响', '只贴数字不下结论，看不出好坏在哪',
+                    ],
+                    [
+                        { text: '代码规范', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '20 分', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '命令与参数记录完整，目录结构清晰，固定随机种子可复跑', textStyle: { textAlign: 'left' }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '手工改路径、参数与报告对不上', textStyle: { textAlign: 'left' }, cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '表达呈现', '10 分', '一页说明讲清"做了什么 — 看到什么 — 为什么"，图表有标题与单位', '截图堆砌，无逻辑无标注',
+                    ],
+                    [
+                        { text: '合计', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+                        { text: '100 分', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#1E4FA8' } } },
+                        { text: '加分项：完成拓展挑战中的任意一条，额外加 5～10 分', textStyle: { textAlign: 'left', color: '#FFFFFF' }, cellStyle: { background: { color: '#1E4FA8' } } },
+                        { text: '上限不超过 110 分', textStyle: { textAlign: 'left', color: '#CFE0F7' }, cellStyle: { background: { color: '#1E4FA8' } } },
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#E8EFF8', borderLeft: '5px solid #1E4FA8', borderRadius: 6, paddingLeft: 16, paddingRight: 14, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.55 }}>
+                    <span style={{ fontWeight: 'bold' }}>评分取向：</span>结果只占四成、分析占三成——<span style={{ fontWeight: 'bold', color: '#0E3F8C' }}>跑出数字只是及格线，说清数字背后的原因才算完成</span>。ViT 拿到 53.4% 并不可耻，说不出它为什么是 53.4% 才是问题。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>36 / 38</Text>
+    </Box>
+</Slide>

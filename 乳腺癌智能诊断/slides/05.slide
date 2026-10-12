@@ -1,0 +1,79 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>BUSI 数据集：三类影像长什么样</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>01 临床背景与数据</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 26, paddingTop: 22, paddingLeft: 40, paddingRight: 40, paddingBottom: 22 }}>
+        <Box style={{ width: 600, gap: 10 }}>
+            <Image src="assets/dataset_samples.png" style={{ width: 600, height: 505, objectFit: 'cover', borderRadius: 10, border: '1px solid #D6DCE5' }} />
+            <Text style={{ fontSize: 15, color: '#8B97A8' }}>
+                图：从 BUSI 数据集中随机抽取的真实乳腺超声图像（每行一类，良性 / 恶性 / 正常）
+            </Text>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderLeft: '5px solid #3D7BD9', borderRadius: 8, padding: 12, gap: 7 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0E3F8C' }}>良性 benign</Text>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>437 张</Text>
+                </Box>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    多为纤维腺瘤等，形态规则、边界清晰、回声均匀，包膜完整，纵横比小于 1。
+                </Text>
+                <Box style={{ flexDirection: 'row', gap: 8, marginTop: 'auto' }}>
+                    <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 12, paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4 }}>
+                        <Text style={{ fontSize: 15, color: '#4A5568' }}>占比 56.0%</Text>
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FDECEC', border: '1px solid #F5C6C4', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 12, gap: 7 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#B03430' }}>恶性 malignant</Text>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#D9534F' }}>210 张</Text>
+                </Box>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    形态不规则、边缘呈毛刺或分叶，内部回声不均，后方可伴声影，纵横比大于 1。
+                </Text>
+                <Box style={{ flexDirection: 'row', gap: 8, marginTop: 'auto' }}>
+                    <Box style={{ background: '#FFFFFF', border: '1px solid #F5C6C4', borderRadius: 12, paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4 }}>
+                        <Text style={{ fontSize: 15, color: '#B03430' }}>占比 26.9%</Text>
+                    </Box>
+                    <Box style={{ background: '#D9534F', borderRadius: 12, paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4 }}>
+                        <Text style={{ fontSize: 15, color: '#FFFFFF' }}>漏诊代价最高</Text>
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F0F5FC', border: '1px solid #D6DCE5', borderLeft: '5px solid #8B97A8', borderRadius: 8, padding: 12, gap: 7 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#0E3F8C' }}>正常 normal</Text>
+                    <Text style={{ fontSize: 26, fontWeight: 'bold', color: '#1E4FA8' }}>133 张</Text>
+                </Box>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    腺体层回声均匀、未见明确占位性病变，是判断模型是否"过度报警"的对照组。
+                </Text>
+                <Box style={{ flexDirection: 'row', gap: 8, marginTop: 'auto' }}>
+                    <Box style={{ background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 12, paddingLeft: 12, paddingRight: 12, paddingTop: 4, paddingBottom: 4 }}>
+                        <Text style={{ fontSize: 15, color: '#4A5568' }}>占比 17.1%</Text>
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box style={{ height: 64, background: '#FFF8E1', borderLeft: '5px solid #FFC107', borderRadius: 6, paddingLeft: 16, paddingRight: 14, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 17, color: '#1A2230', lineHeight: 1.45 }}>
+                    <span style={{ fontWeight: 'bold' }}>数据判断：</span>三类比例约 3.3 : 1.6 : 1——必须做分层划分与类别加权，否则模型会靠"猜多数类"拿到虚高的准确率。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>05 / 38</Text>
+    </Box>
+</Slide>

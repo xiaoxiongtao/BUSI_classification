@@ -1,0 +1,52 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <svg width={1280} height={720} viewBox='0 0 1280 720' style={{ position: 'absolute', top: 0, left: 0, opacity: 0.18 }}>
+        <rect x='820' y='190' width='400' height='400' rx='12' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M920 190 V 590 M1020 190 V 590 M1120 190 V 590' stroke='#8FC0F0' strokeWidth='2' />
+        <path d='M820 290 H 1220 M820 390 H 1220 M820 490 H 1220' stroke='#8FC0F0' strokeWidth='2' />
+        <circle cx='870' cy='240' r='14' fill='#8FC0F0' />
+        <circle cx='1070' cy='440' r='14' fill='#8FC0F0' />
+        <circle cx='1170' cy='340' r='14' fill='#8FC0F0' />
+        <path d='M884 240 L 1056 440' stroke='#8FC0F0' strokeWidth='2' />
+        <path d='M884 248 L 1156 338' stroke='#8FC0F0' strokeWidth='2' />
+    </svg>
+    <Box style={{ width: '100%', height: '100%', paddingTop: 84, paddingLeft: 72, paddingRight: 72, paddingBottom: 72, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 40 }}>
+            <Text style={{ fontSize: 200, fontWeight: 'bold', color: '#3D7BD9', lineHeight: 1 }}>
+                04
+            </Text>
+            <Box style={{ width: 3, height: 150, background: 'rgba(255,255,255,0.35)' }} />
+            <Box style={{ gap: 14 }}>
+                <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3 }}>
+                    ViT：视觉 Transformer
+                </Text>
+                <Text style={{ fontFamily: 'Times New Roman', fontSize: 21, color: '#8FC0F0', letterSpacing: 1 }}>
+                    An Image is Worth 16x16 Words · Dosovitskiy et al., 2020
+                </Text>
+                <Text style={{ fontSize: 21, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    把图像切成 196 个小块，当成 196 个单词交给 Transformer。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 24 }}>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>从局部到全局</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    卷积只看邻域，自注意力第一层就能把全图任意两个位置关联起来。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>分块与位置</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    16×16 Patch Embedding 把 224×224 图变成 196 个 token，再加可学习位置编码。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>代价与边界</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    少了卷积的归纳偏置，需要更大的数据量才能学会"看图"的先验。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

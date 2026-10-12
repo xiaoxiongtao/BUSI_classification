@@ -1,0 +1,106 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>任务书：训练一个 ResNet-18 并读懂它的成绩单</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>07 课堂实战任务</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 660, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>四条命令，跑通一次完整的训练与评估</Text>
+            </Box>
+
+            <CodeBlock
+                code={`# ① 安装依赖（建议 Python 3.10 ~ 3.12）
+pip install -r requirements.txt
+
+# ② 数据集放到 data/ 后开始训练
+python train.py --model resnet --depth 18 --epochs 50
+#   最优权重存到 outputs/checkpoints/resnet18_best.pt
+
+# ③ 用最佳权重在测试集上评估
+python evaluate.py --model resnet --depth 18
+
+# ④ 选做：训练 ViT-B/16 做对照
+python train.py --model vit --vit-variant b16 --epochs 50`}
+                language='bash'
+                width={640}
+                fontSize={12}
+                theme='github-light'
+            />
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>参考基线（便于自检）</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    ResNet-18 在本项目配置下：测试集准确率约 <span style={{ fontWeight: 'bold', color: '#1E4FA8' }}>87.3%</span>、macro-F1 约 <span style={{ fontWeight: 'bold', color: '#1E4FA8' }}>0.867</span>，最佳轮次出现在第 29 轮前后，第 44 轮触发早停。若偏差超过 5 个百分点，先检查随机种子与数据划分是否一致。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 8 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 14, gap: 4 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>五个步骤</Text>
+                <Text style={{ fontSize: 16, color: '#CFE0F7' }}>按顺序完成，每步都要留下记录</Text>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start', background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 8, padding: 8 }}>
+                <Box style={{ width: 26, height: 26, background: '#1E4FA8', borderRadius: 13, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>1</Text>
+                </Box>
+                <Box style={{ flex: 1, gap: 2 }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>准备数据</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>数据集放到 data/ 下，确认三个类别文件夹齐全，掩膜文件自动忽略。</Text>
+                </Box>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start', background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 8, padding: 8 }}>
+                <Box style={{ width: 26, height: 26, background: '#1E4FA8', borderRadius: 13, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>2</Text>
+                </Box>
+                <Box style={{ flex: 1, gap: 2 }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>启动训练</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>记录首轮与末轮的 train/val loss，看差距是收窄还是扩大。</Text>
+                </Box>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start', background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 8, padding: 8 }}>
+                <Box style={{ width: 26, height: 26, background: '#1E4FA8', borderRadius: 13, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>3</Text>
+                </Box>
+                <Box style={{ flex: 1, gap: 2 }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>记录最佳模型</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>写下最佳轮次与验证集 macro-F1，说明早停在第几轮触发。</Text>
+                </Box>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start', background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 8, padding: 8 }}>
+                <Box style={{ width: 26, height: 26, background: '#1E4FA8', borderRadius: 13, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#FFFFFF' }}>4</Text>
+                </Box>
+                <Box style={{ flex: 1, gap: 2 }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>读混淆矩阵</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>指出恶性类被误判成哪一类、各有多少例，并估算召回率。</Text>
+                </Box>
+            </Box>
+
+            <Box style={{ flexDirection: 'row', gap: 10, alignItems: 'flex-start', background: '#FFF8E1', border: '1px solid #FFC107', borderRadius: 8, padding: 8 }}>
+                <Box style={{ width: 26, height: 26, background: '#FFC107', borderRadius: 13, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: '#0E3F8C' }}>5</Text>
+                </Box>
+                <Box style={{ flex: 1, gap: 2 }}>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold', color: '#0E3F8C' }}>回答一个"为什么"</Text>
+                    <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.45 }}>改一个超参（如 --no-use-class-weights）重跑，解释它对恶性召回率的影响。</Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>35 / 38</Text>
+    </Box>
+</Slide>

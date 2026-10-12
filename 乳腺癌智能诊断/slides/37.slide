@@ -1,0 +1,107 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>拓展挑战：三条进阶路径</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>07 课堂实战任务</Text>
+    </Box>
+
+    <Box style={{ flex: 1, gap: 16, paddingTop: 18, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ height: 268, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, paddingTop: 10, paddingLeft: 10 }}>
+            <svg width={1180} height={248} viewBox='0 0 1180 248'>
+                <rect x='10' y='92' width='132' height='64' rx='8' fill='#0E3F8C' />
+                <text x='76' y='120' font-size='19' fill='#FFFFFF' text-anchor='middle' font-family='Microsoft YaHei'>完成任务书</text>
+                <text x='76' y='142' font-size='14' fill='#8FC0F0' text-anchor='middle' font-family='Microsoft YaHei'>ResNet-18 基线</text>
+
+                <path d='M142 124 H 158' stroke='#8B97A8' strokeWidth='2' />
+                <path d='M158 124 V 60 H 172' stroke='#8B97A8' strokeWidth='2' fill='none' />
+                <path d='M158 124 V 124 H 172' stroke='#8B97A8' strokeWidth='2' fill='none' />
+                <path d='M158 124 V 188 H 172' stroke='#8B97A8' strokeWidth='2' fill='none' />
+
+                <rect x='172' y='52' width='524' height='10' rx='5' fill='#3D7BD9' />
+                <path d='M696 57 H 1120' stroke='#D6DCE5' strokeWidth='8' strokeDasharray='14 10' strokeLinecap='round' />
+                <circle cx='704' cy='57' r='9' fill='#3D7BD9' />
+                <text x='726' y='50' font-size='19' font-weight='bold' fill='#0E3F8C' font-family='Microsoft YaHei'>路径一 · 调参</text>
+                <text x='726' y='72' font-size='15' fill='#4A5568' font-family='Microsoft YaHei'>不动结构，只动超参</text>
+                <text x='440' y='48' font-size='14' fill='#FFFFFF' text-anchor='middle' font-family='Microsoft YaHei'>1–2 小时</text>
+
+                <rect x='172' y='117' width='706' height='14' rx='7' fill='#1E4FA8' />
+                <path d='M878 124 H 1120' stroke='#D6DCE5' strokeWidth='12' strokeDasharray='14 10' strokeLinecap='round' />
+                <circle cx='890' cy='124' r='11' fill='#1E4FA8' />
+                <text x='912' y='117' font-size='19' font-weight='bold' fill='#0E3F8C' font-family='Microsoft YaHei'>路径二 · 换架构</text>
+                <text x='912' y='138' font-size='15' fill='#4A5568' font-family='Microsoft YaHei'>替换骨干网络或加模块</text>
+                <text x='520' y='129' font-size='14' fill='#FFFFFF' text-anchor='middle' font-family='Microsoft YaHei'>半天 ~ 一天</text>
+
+                <rect x='172' y='182' width='922' height='18' rx='9' fill='#0E3F8C' />
+                <circle cx='1110' cy='191' r='13' fill='#0E3F8C' />
+                <circle cx='1110' cy='191' r='6' fill='#FFC107' />
+                <text x='660' y='196' font-size='14' fill='#FFFFFF' text-anchor='middle' font-family='Microsoft YaHei'>一到两天</text>
+                <text x='1096' y='224' font-size='19' font-weight='bold' fill='#0E3F8C' text-anchor='end' font-family='Microsoft YaHei'>路径三 · 可解释性</text>
+                <text x='1096' y='242' font-size='15' fill='#4A5568' text-anchor='end' font-family='Microsoft YaHei'>让模型说出它看了哪里</text>
+
+                <path d='M142 60 V 188' stroke='#E5E7EB' strokeWidth='1' />
+                <text x='10' y='30' font-size='15' fill='#8B97A8' font-family='Microsoft YaHei'>投入时间 →</text>
+                <path d='M112 24 H 1120' stroke='#E5E7EB' strokeWidth='1' />
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, flexDirection: 'row', gap: 16 }}>
+            <Box style={{ width: 356, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #3D7BD9', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    <Box style={{ background: '#3D7BD9', borderRadius: 4, paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3 }}>
+                        <Text style={{ fontSize: 14, color: '#FFFFFF', fontWeight: 'bold' }}>入门</Text>
+                    </Box>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>调参：找最敏感的那一个</Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    保持网络不变，依次改动学习率（3e-4 → 1e-4 / 1e-3）、批大小（16 / 32）、是否启用类别权重，每次只改一处。
+                </Text>
+                <Box style={{ background: '#F0F5FC', borderRadius: 6, padding: 10 }}>
+                    <Text style={{ fontSize: 15, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold', color: '#0E3F8C' }}>验收：</span>三组设置的 macro-F1 对照表 + 一句话指出哪个超参影响最大。
+                    </Text>
+                </Box>
+            </Box>
+
+            <Box style={{ width: 396, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    <Box style={{ background: '#1E4FA8', borderRadius: 4, paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3 }}>
+                        <Text style={{ fontSize: 14, color: '#FFFFFF', fontWeight: 'bold' }}>进阶</Text>
+                    </Box>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>换架构：改动网络本身</Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    换成 ResNet-50 / ResNet-101，或 ViT-B/32；也可在残差块中插入 SE、CBAM 等轻量注意力模块，只增加极少参数。
+                </Text>
+                <Box style={{ background: '#F0F5FC', borderRadius: 6, padding: 10 }}>
+                    <Text style={{ fontSize: 15, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold', color: '#0E3F8C' }}>验收：</span>与 ResNet-18 同条件对比，说明参数量涨了、准确率是否同步涨。
+                    </Text>
+                </Box>
+            </Box>
+
+            <Box style={{ width: 412, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #0E3F8C', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    <Box style={{ background: '#0E3F8C', borderRadius: 4, paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3 }}>
+                        <Text style={{ fontSize: 14, color: '#FFFFFF', fontWeight: 'bold' }}>挑战</Text>
+                    </Box>
+                    <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>可解释性：让模型指认病灶</Text>
+                </Box>
+                <Text style={{ fontSize: 15, color: '#4A5568', lineHeight: 1.5 }}>
+                    用 Grad-CAM 对最后一个卷积层取激活热力图，叠回原图观察模型关注区域，并与数据集自带的人工掩膜比对。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10 }}>
+                    <Text style={{ fontSize: 15, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold', color: '#0E3F8C' }}>验收：</span>挑 3 张恶性样本，判断高亮是否落在病灶区，讨论它与医生标注的差异。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>37 / 38</Text>
+    </Box>
+</Slide>

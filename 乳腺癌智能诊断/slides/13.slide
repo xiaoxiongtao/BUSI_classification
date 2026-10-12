@@ -1,0 +1,91 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>残差学习：把恒等映射"画"进结构里</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>03 ResNet：深度残差网络</Text>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 690, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, paddingTop: 12, paddingBottom: 12, alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={660} height={450} viewBox='0 0 660 450'>
+                <text x='330' y='24' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>残差块（Residual Block）的数据流</text>
+
+                <text x='30' y='150' fill='#1E4FA8' font-size='26' font-weight='bold' font-family='Microsoft YaHei'>x</text>
+                <path d='M46 142 H 92' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M84 136 L 94 142 L 84 148' fill='#1E4FA8' />
+
+                <rect x='94' y='112' width='168' height='60' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='178' y='140' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>3×3 Conv</text>
+                <text x='178' y='161' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>BN + ReLU</text>
+
+                <path d='M262 142 H 292' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M284 136 L 294 142 L 284 148' fill='#1E4FA8' />
+
+                <rect x='294' y='112' width='158' height='60' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='373' y='140' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>3×3 Conv</text>
+                <text x='373' y='161' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>BN</text>
+
+                <path d='M452 142 H 482' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M474 136 L 484 142 L 474 148' fill='#1E4FA8' />
+
+                <circle cx='506' cy='142' r='24' fill='#FFFFFF' stroke='#D9534F' strokeWidth='3' />
+                <text x='506' y='152' fill='#D9534F' font-size='28' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                <path d='M530 142 H 556' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M548 136 L 558 142 L 548 148' fill='#1E4FA8' />
+
+                <rect x='558' y='112' width='82' height='60' rx='8' fill='#FFC107' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='599' y='150' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>ReLU</text>
+
+                <path d='M640 142 H 654' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='330' y='98' fill='#4A5568' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>↑ 主支路：学习残差 F(x)</text>
+
+                <path d='M36 160 V 300 H 506 V 172' fill='none' stroke='#D9534F' strokeWidth='3' />
+                <path d='M500 182 L 506 170 L 512 182' fill='#D9534F' />
+                <text x='270' y='326' fill='#D9534F' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>跳跃连接 shortcut：直接把 x 送到输出端</text>
+
+                <rect x='60' y='356' width='540' height='66' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='330' y='384' fill='#1A2230' font-size='18' text-anchor='middle' font-family='Microsoft YaHei'>当最优解就是恒等映射时，只需让 F(x) 的权重趋近 0</text>
+                <text x='330' y='408' fill='#1E4FA8' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>H(x) = F(x) + x → x，深层网络至少不会比浅层更差</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 18, alignItems: 'center', gap: 8 }}>
+                <Text style={{ fontSize: 19, color: '#8FC0F0' }}>残差块的输出</Text>
+                <Math latex='H(x) = F(x) + x' width={300} color='#FFFFFF' />
+                <Text style={{ fontSize: 17, color: '#CFE0F7', textAlign: 'center', lineHeight: 1.5 }}>
+                    F(x) 是两层卷积要学的残差，x 是未经变换的输入
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>① 学习目标变简单了</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    原来要拟合完整的 H(x)，现在只需拟合"与输入的差值"。让残差趋近 0，比让一堆非线性层输出原值容易得多。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>② 梯度有了直达通道</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    反向传播时，加法运算把梯度原封不动地分给跳跃支路，第 1 层仍能从第 100 层直接拿到梯度。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>③ 深度不再是负担</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    有了这条"保底线"，ResNet 才第一次把可用深度推到 152 层，并在 2015 年 ImageNet 上把错误率降到 3.57%。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>13 / 38</Text>
+    </Box>
+</Slide>

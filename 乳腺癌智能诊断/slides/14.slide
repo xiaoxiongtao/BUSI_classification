@@ -1,0 +1,157 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>两种残差块：BasicBlock 与 Bottleneck</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>03 ResNet：深度残差网络</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 700, gap: 12 }}>
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 10, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+                <svg width={660} height={228} viewBox='0 0 660 228'>
+                    <text x='330' y='20' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>BasicBlock（ResNet-18 / 34 使用）</text>
+
+                    <text x='26' y='104' fill='#1E4FA8' font-size='24' font-weight='bold' font-family='Microsoft YaHei'>x</text>
+                    <path d='M42 96 H 76' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M68 90 L 78 96 L 68 102' fill='#1E4FA8' />
+
+                    <rect x='78' y='66' width='150' height='60' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                    <text x='153' y='94' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>3×3 Conv, 64</text>
+                    <text x='153' y='115' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>BN + ReLU</text>
+
+                    <path d='M228 96 H 258' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M250 90 L 260 96 L 250 102' fill='#1E4FA8' />
+
+                    <rect x='260' y='66' width='150' height='60' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                    <text x='335' y='94' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>3×3 Conv, 64</text>
+                    <text x='335' y='115' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>BN</text>
+
+                    <path d='M410 96 H 440' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M432 90 L 442 96 L 432 102' fill='#1E4FA8' />
+
+                    <circle cx='464' cy='96' r='22' fill='#FFFFFF' stroke='#D9534F' strokeWidth='3' />
+                    <text x='464' y='105' fill='#D9534F' font-size='26' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                    <path d='M486 96 H 512' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M504 90 L 514 96 L 504 102' fill='#1E4FA8' />
+                    <text x='556' y='102' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>ReLU 输出</text>
+
+                    <path d='M32 112 V 176 H 464 V 124' fill='none' stroke='#D9534F' strokeWidth='3' />
+                    <path d='M458 134 L 464 122 L 470 134' fill='#D9534F' />
+                    <text x='248' y='204' fill='#D9534F' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>shortcut 恒等映射（通道数不变，直接相加）</text>
+                </svg>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#F7F9FC', border: '1px solid #D6DCE5', borderLeft: '5px solid #FFC107', borderRadius: 10, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+                <svg width={660} height={228} viewBox='0 0 660 228'>
+                    <text x='330' y='20' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Bottleneck（ResNet-50 / 101 使用，expansion = 4）</text>
+
+                    <text x='26' y='104' fill='#1E4FA8' font-size='24' font-weight='bold' font-family='Microsoft YaHei'>x</text>
+                    <path d='M42 96 H 62' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M54 90 L 64 96 L 54 102' fill='#1E4FA8' />
+
+                    <rect x='64' y='66' width='112' height='60' rx='8' fill='#FFF8E1' stroke='#0E3F8C' strokeWidth='2' />
+                    <text x='120' y='94' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>1×1 Conv</text>
+                    <text x='120' y='115' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>256 → 64 降维</text>
+
+                    <path d='M176 96 H 196' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M188 90 L 198 96 L 188 102' fill='#1E4FA8' />
+
+                    <rect x='198' y='66' width='112' height='60' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                    <text x='254' y='94' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>3×3 Conv</text>
+                    <text x='254' y='115' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>64 通道提特征</text>
+
+                    <path d='M310 96 H 330' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M322 90 L 332 96 L 322 102' fill='#1E4FA8' />
+
+                    <rect x='332' y='66' width='112' height='60' rx='8' fill='#FFF8E1' stroke='#0E3F8C' strokeWidth='2' />
+                    <text x='388' y='94' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>1×1 Conv</text>
+                    <text x='388' y='115' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>64 → 256 升维</text>
+
+                    <path d='M444 96 H 470' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M462 90 L 472 96 L 462 102' fill='#1E4FA8' />
+
+                    <circle cx='494' cy='96' r='22' fill='#FFFFFF' stroke='#D9534F' strokeWidth='3' />
+                    <text x='494' y='105' fill='#D9534F' font-size='26' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                    <path d='M516 96 H 542' stroke='#1E4FA8' strokeWidth='2' />
+                    <path d='M534 90 L 544 96 L 534 102' fill='#1E4FA8' />
+                    <text x='588' y='102' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>ReLU 输出</text>
+
+                    <path d='M32 112 V 176 H 494 V 124' fill='none' stroke='#D9534F' strokeWidth='3' strokeDasharray='8 5' />
+                    <path d='M488 134 L 494 122 L 500 134' fill='#D9534F' />
+                    <text x='263' y='204' fill='#D9534F' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>通道数变化时用 1×1 卷积投影（虚线）对齐尺寸后再相加</text>
+                </svg>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>为什么深网络要改用瓶颈结构？</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 226 }}
+                defaultTextStyle={{ fontSize: 17, textAlign: 'left', color: '#1A2230' }}
+                defaultCellStyle={{
+                    paddingLeft: 14,
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '对比项', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: 'BasicBlock', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: 'Bottleneck', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '卷积层数', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '2 层 3×3', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '1×1 → 3×3 → 1×1', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '通道变化', '保持不变', '先降 4 倍，再升 4 倍',
+                    ],
+                    [
+                        { text: '参数与算力', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '单层较费', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '3×3 在低维做，省算力', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        '用于', 'ResNet-18 / 34', 'ResNet-50 / 101 / 152',
+                    ],
+                    [
+                        { text: 'shortcut', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '多为恒等映射', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '常用 1×1 卷积投影', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>代码里的两个细节</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    · 下采样时 stride = 2，同时 shortcut 换成 1×1 卷积 + BN，保证两条支路尺寸一致。
+                </Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    · 相加<span style={{ fontWeight: 'bold' }}>之后</span>才做 ReLU，这是 ResNet 原文的顺序（先加后激活），顺序颠倒会削弱恒等通路。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10, marginTop: 'auto' }}>
+                    <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold' }}>判断：</span>Bottleneck 用"降维—提特征—升维"换取更深的堆叠能力，是参数量与深度之间的工程平衡。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>14 / 38</Text>
+    </Box>
+</Slide>

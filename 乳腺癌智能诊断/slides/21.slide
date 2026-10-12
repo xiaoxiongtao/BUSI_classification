@@ -1,0 +1,121 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>多头自注意力：Q、K、V 与缩放点积</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>04 ViT：视觉 Transformer</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 700, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 8, alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={660} height={470} viewBox='0 0 660 470'>
+                <text x='330' y='20' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>单头注意力的计算流程（Multi-Head 则是并行做 h 次）</text>
+
+                <rect x='255' y='34' width='150' height='44' rx='8' fill='#FFFFFF' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='330' y='62' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>输入 X：N × D</text>
+
+                <path d='M310 78 V 92 H 140 V 106' fill='none' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M330 78 V 106' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M350 78 V 92 H 520 V 106' fill='none' stroke='#1E4FA8' strokeWidth='2' />
+
+                <rect x='60' y='108' width='160' height='52' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='140' y='131' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Q = X W_Q</text>
+                <text x='140' y='150' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>查询：我想找什么</text>
+
+                <rect x='250' y='108' width='160' height='52' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='330' y='131' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>K = X W_K</text>
+                <text x='330' y='150' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>键：我能提供什么</text>
+
+                <rect x='440' y='108' width='160' height='52' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='520' y='131' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>V = X W_V</text>
+                <text x='520' y='150' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>值：我携带的信息</text>
+
+                <path d='M140 160 V 180 H 300 V 196' fill='none' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M330 160 V 196' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M520 160 V 180 H 400 V 196' fill='none' stroke='#1E4FA8' strokeWidth='2' />
+
+                <rect x='190' y='198' width='280' height='52' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='330' y='221' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>打分 QKᵀ ÷ √d_k</text>
+                <text x='330' y='240' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>得到 N × N 的相关性矩阵</text>
+
+                <g>
+                    <rect x='500' y='186' width='132' height='76' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='198' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='534' y='198' width='20' height='20' fill='#8FB4E8' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='556' y='198' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='578' y='198' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='600' y='198' width='20' height='20' fill='#1E4FA8' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='220' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='534' y='220' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='556' y='220' width='20' height='20' fill='#1E4FA8' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='578' y='220' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='600' y='220' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='242' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='534' y='242' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='556' y='242' width='20' height='20' fill='#8FB4E8' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='578' y='242' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='600' y='242' width='20' height='20' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <text x='566' y='278' fill='#8B97A8' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>注意力权重矩阵</text>
+                </g>
+
+                <path d='M330 250 V 268' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M324 262 L 330 270 L 336 262' fill='#1E4FA8' />
+
+                <rect x='190' y='272' width='280' height='52' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='330' y='295' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Softmax 归一化</text>
+                <text x='330' y='314' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>每一行的权重和为 1</text>
+
+                <path d='M470 298 H 520 V 340 H 400' fill='none' stroke='#D9534F' strokeWidth='2' />
+                <path d='M408 334 L 396 340 L 408 346' fill='#D9534F' />
+                <path d='M330 324 V 340' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M324 334 L 330 342 L 336 334' fill='#1E4FA8' />
+
+                <rect x='190' y='346' width='280' height='52' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='330' y='369' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>加权求和 A · V</text>
+                <text x='330' y='388' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>按相关性混合所有位置的信息</text>
+                <text x='470' y='372' fill='#D9534F' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>V 从右侧汇入</text>
+
+                <path d='M330 398 V 414' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M324 408 L 330 416 L 336 408' fill='#1E4FA8' />
+
+                <rect x='130' y='418' width='400' height='42' rx='8' fill='#0E3F8C' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='330' y='445' fill='#FFFFFF' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>多头拼接：Concat(head₁ … head₁₂) · W_O → N × D</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ background: '#0E3F8C', borderRadius: 10, padding: 16, alignItems: 'center', gap: 8 }}>
+                <Text style={{ fontSize: 18, color: '#8FC0F0' }}>缩放点积注意力</Text>
+                <Math latex='Attention(Q,K,V)=softmax\!\left(\frac{QK^{\top}}{\sqrt{d_k}}\right)V' width={330} color='#FFFFFF' />
+                <Math latex='head_i = Attention(XW_i^Q,\;XW_i^K,\;XW_i^V)' width={320} color='#CFE0F7' />
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>① Q、K、V 到底是什么</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    同一个 X 经三个线性变换得到三种角色。Q 与 K 的点积衡量"两个 patch 有多相关"，V 是被加权取出的内容。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>② 为什么要除以 √d_k</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    d_k = 64 时点积方差约为 64，数值过大把 softmax 推入饱和区、梯度趋近 0。除以 √d_k 把方差拉回 1。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>③ 多头在并行看什么</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    ViT-B/16 有 12 个头，每头只看 64 维子空间：有的盯病灶边缘，有的盯远处背景，有的近似 CNN 局部模式。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>21 / 38</Text>
+    </Box>
+</Slide>

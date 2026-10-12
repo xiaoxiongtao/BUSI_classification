@@ -1,0 +1,71 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>网络加深的困境：退化而不是过拟合</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>03 ResNet：深度残差网络</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 730, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 10, alignItems: 'center' }}>
+            <svg width={710} height={470} viewBox='0 0 710 470'>
+                <text x='355' y='26' fill='#0E3F8C' font-size='20' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>训练误差随网络加深的变化（He et al., 2015 的经典观察）</text>
+
+                <path d='M90 70 V 400 H 690' stroke='#8B97A8' strokeWidth='2' fill='none' />
+                <text x='56' y='84' fill='#8B97A8' font-size='16' text-anchor='end' font-family='Microsoft YaHei'>误差</text>
+                <text x='355' y='432' fill='#8B97A8' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>训练轮数 →</text>
+
+                <polyline points='90,382 200,268 310,196 420,152 530,128 690,104' fill='none' stroke='#1E4FA8' strokeWidth='4' />
+                <polyline points='90,382 200,306 310,252 420,222 530,206 690,196' fill='none' stroke='#D9534F' strokeWidth='4' strokeDasharray='9 6' />
+
+                <rect x='470' y='60' width='200' height='62' rx='8' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='1' />
+                <path d='M486 82 H 514' stroke='#1E4FA8' strokeWidth='4' />
+                <text x='524' y='88' fill='#1A2230' font-size='16' font-family='Microsoft YaHei'>20 层 普通网络</text>
+                <path d='M486 106 H 514' stroke='#D9534F' strokeWidth='4' strokeDasharray='9 6' />
+                <text x='524' y='112' fill='#1A2230' font-size='16' font-family='Microsoft YaHei'>56 层 普通网络</text>
+
+                <path d='M560 210 L 640 210' stroke='#D9534F' strokeWidth='2' />
+                <text x='650' y='215' fill='#D9534F' font-size='17' font-weight='bold' font-family='Microsoft YaHei'>更深反而更差</text>
+                <path d='M560 112 L 640 112' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='650' y='117' fill='#1E4FA8' font-size='17' font-weight='bold' font-family='Microsoft YaHei'>浅层更好</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>先分清：这是哪一种"坏"？</Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>过拟合 ≠ 退化</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    过拟合的特征是"训练误差很低、测试误差很高"。而这里 56 层网络的<span style={{ fontWeight: 'bold', color: '#D9534F' }}>训练误差本身就更高</span>，说明模型连训练集都拟合不好。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>梯度连乘的衰减</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    反向传播是 Jacobian 矩阵的连乘。层数增加后，梯度范数容易指数级缩小或放大，前面几层几乎收不到有效更新信号。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>更深一层的追问</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    如果多加的层只做恒等映射，加深不该变差。问题在于：让一堆非线性层去拟合"输入等于输出"，比想象中难得多。
+                </Text>
+                <Text style={{ fontSize: 17, color: '#1E4FA8', fontWeight: 'bold', marginTop: 2 }}>
+                    → 那就把恒等映射"画"进结构里。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>12 / 38</Text>
+    </Box>
+</Slide>

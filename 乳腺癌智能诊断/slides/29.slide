@@ -1,0 +1,110 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>六个模型的测试集成绩单</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>06 实验结果与分析</Text>
+    </Box>
+
+    <Box style={{ height: 604, gap: 14, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ height: 138, background: '#0E3F8C', borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingLeft: 32, paddingRight: 32, gap: 28 }}>
+            <Box style={{ gap: 4 }}>
+                <Text style={{ fontSize: 19, color: '#8FC0F0' }}>最优模型 ResNet-50</Text>
+                <Text style={{ fontSize: 17, color: '#CFE0F7' }}>测试集 · 118 张超声图</Text>
+            </Box>
+            <Box style={{ width: 2, height: 90, background: 'rgba(255,255,255,0.3)' }} />
+            <Box style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
+                <Text style={{ fontSize: 116, fontWeight: 'bold', color: '#FFC107', lineHeight: 1 }}>89.8</Text>
+                <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#FFC107' }}>%</Text>
+            </Box>
+            <Box style={{ gap: 4 }}>
+                <Text style={{ fontSize: 20, color: '#FFFFFF', fontWeight: 'bold' }}>准确率</Text>
+                <Text style={{ fontSize: 17, color: '#CFE0F7' }}>macro-F1 = 0.890</Text>
+            </Box>
+            <Box style={{ flex: 1 }} />
+            <Box style={{ alignItems: 'flex-end', gap: 4 }}>
+                <Text style={{ fontSize: 18, color: '#CFE0F7' }}>参数量最大的 ViT-B/16</Text>
+                <Box style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
+                    <Text style={{ fontSize: 46, fontWeight: 'bold', color: '#FFFFFF' }}>53.4%</Text>
+                    <Text style={{ fontSize: 17, color: '#8FC0F0' }}>85.8 M 参数</Text>
+                </Box>
+            </Box>
+        </Box>
+
+        <Table
+            style={{ width: '100%', height: 350 }}
+            defaultTextStyle={{ fontSize: 17, textAlign: 'center', color: '#1A2230' }}
+            defaultCellStyle={{
+                border: {
+                    left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                    top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                },
+            }}
+            cells={[
+                [
+                    { text: '模型', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: '参数量', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: 'Accuracy', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: 'macro-P', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: 'macro-R', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: 'macro-F1', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    { text: '最佳轮次', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                ],
+                [
+                    { text: 'ResNet-50', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '23.5 M', cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '89.8%', textStyle: { bold: true, color: '#0E3F8C', fontSize: 19 }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '0.898', cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '0.883', cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '0.890', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    { text: '34', cellStyle: { background: { color: '#FFF8E1' } } },
+                ],
+                [
+                    'ResNet-101', '42.5 M', '88.1%', '0.878', '0.869', '0.872', '45',
+                ],
+                [
+                    { text: 'ResNet-18', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '11.2 M', cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '87.3%', cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '0.851', cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '0.891', cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '0.867', cellStyle: { background: { color: '#F0F5FC' } } },
+                    { text: '29', cellStyle: { background: { color: '#F0F5FC' } } },
+                ],
+                [
+                    'ResNet-34', '21.3 M', '82.2%', '0.814', '0.833', '0.823', '21',
+                ],
+                [
+                    { text: 'ViT-B/16（预训练）', textStyle: { bold: true, color: '#B03430' }, cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '85.8 M', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '53.4%', textStyle: { bold: true, color: '#D9534F' }, cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.461', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.444', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.439', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '17', cellStyle: { background: { color: '#FDECEC' } } },
+                ],
+                [
+                    { text: 'ViT 轻量版（从零）', textStyle: { bold: true, color: '#B03430' }, cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '3.4 M', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '53.4%', textStyle: { bold: true, color: '#D9534F' }, cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.441', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.402', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '0.401', cellStyle: { background: { color: '#FDECEC' } } },
+                    { text: '20', cellStyle: { background: { color: '#FDECEC' } } },
+                ],
+            ]}
+        />
+
+        <Box style={{ height: 62, background: '#FFF8E1', borderLeft: '5px solid #FFC107', borderRadius: 6, paddingLeft: 16, paddingRight: 14, justifyContent: 'center' }}>
+            <Text style={{ fontSize: 18, color: '#1A2230', lineHeight: 1.5 }}>
+                <span style={{ fontWeight: 'bold' }}>数据判断：</span>排名与参数量完全不相关——85.8 M 的 ViT-B/16 与 3.4 M 的轻量 ViT 同为 53.4%，而 23.5 M 的 ResNet-50 领先第二名 1.7 个百分点。在小样本医学影像上，<span style={{ fontWeight: 'bold', color: '#D9534F' }}>架构的归纳偏置比参数规模更能决定结果</span>。
+            </Text>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>29 / 38</Text>
+    </Box>
+</Slide>

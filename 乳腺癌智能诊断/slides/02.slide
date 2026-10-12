@@ -1,0 +1,79 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ flexDirection: 'row', width: '100%', height: '100%' }}>
+        <Box style={{
+            width: 352, height: '100%', background: '#0E3F8C',
+            paddingTop: 96, paddingLeft: 48, paddingRight: 40, gap: 18,
+        }}>
+            <Box style={{ width: 60, height: 6, background: '#FFC107' }} />
+            <Text style={{ fontSize: 52, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 6 }}>
+                课程导览
+            </Text>
+            <Text style={{ fontFamily: 'Times New Roman', fontSize: 20, color: '#8FC0F0', letterSpacing: 1 }}>
+                CONTENTS
+            </Text>
+            <Box style={{ height: 1, background: 'rgba(255,255,255,0.28)', marginTop: 8 }} />
+            <Text style={{ fontSize: 19, color: '#CFE0F7', lineHeight: 1.7 }}>
+                七个章节，从临床问题出发，
+                讲清两条主干网络的结构与数学，
+                再用一组真实实验回答：
+                小样本医学影像该选谁。
+            </Text>
+            <Box style={{ marginTop: 12, flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
+                <Text style={{ fontSize: 64, fontWeight: 'bold', color: '#FFC107' }}>07</Text>
+                <Text style={{ fontSize: 20, color: '#CFE0F7' }}>章 / 38 页</Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flex: 1, paddingTop: 72, paddingLeft: 56, paddingRight: 56, paddingBottom: 56, gap: 13 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#E8EFF8', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>01</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>临床背景与数据</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P4 – P6</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#F7F9FC', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>02</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>技术路线与数据处理</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P8 – P10</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#E8EFF8', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>03</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>ResNet：深度残差网络</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P12 – P16</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#F7F9FC', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>04</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>ViT：视觉 Transformer</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P18 – P22</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#E8EFF8', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>05</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>损失函数与优化策略</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P24 – P26</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#F7F9FC', borderRadius: 8, paddingLeft: 20 }}>
+                <Box style={{ width: 44, height: 44, background: '#1E4FA8', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFFFFF' }}>06</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>实验结果与分析</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P28 – P33</Text>
+            </Box>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 14, height: 64, background: '#FFF8E1', borderRadius: 8, paddingLeft: 20, border: '1px solid #FFC107' }}>
+                <Box style={{ width: 44, height: 44, background: '#FFC107', borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#0E3F8C' }}>07</Text>
+                </Box>
+                <Text style={{ fontSize: 27, fontWeight: 'bold', color: '#0E3F8C' }}>课堂实战任务</Text>
+                <Text style={{ fontSize: 18, color: '#8B97A8', marginLeft: 'auto', marginRight: 20 }}>P35 – P37</Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

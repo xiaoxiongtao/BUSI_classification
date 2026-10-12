@@ -1,0 +1,89 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>分块嵌入与位置编码</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>04 ViT：视觉 Transformer</Text>
+    </Box>
+
+    <Box style={{ flex: 1, gap: 12, paddingTop: 18, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 18, paddingTop: 9, paddingBottom: 9 }}>
+            <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>引导问题：一张二维图像，怎么变成 Transformer 能吃的"词序列"？</Text>
+        </Box>
+
+        <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 8, alignItems: 'center' }}>
+            <svg width={1140} height={300} viewBox='0 0 1140 300'>
+                <rect x='30' y='40' width='210' height='210' fill='#FFFFFF' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M45 40 V 250 M60 40 V 250 M75 40 V 250 M90 40 V 250 M105 40 V 250 M120 40 V 250 M135 40 V 250 M150 40 V 250 M165 40 V 250 M180 40 V 250 M195 40 V 250 M210 40 V 250 M225 40 V 250' stroke='#C7D8F2' strokeWidth='1' />
+                <path d='M30 55 H 240 M30 70 H 240 M30 85 H 240 M30 100 H 240 M30 115 H 240 M30 130 H 240 M30 145 H 240 M30 160 H 240 M30 175 H 240 M30 190 H 240 M30 205 H 240 M30 220 H 240 M30 235 H 240' stroke='#C7D8F2' strokeWidth='1' />
+                <rect x='150' y='115' width='15' height='15' fill='#D9534F' stroke='#B03430' strokeWidth='1' />
+                <text x='135' y='272' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>输入 224 × 224 × 3</text>
+                <text x='135' y='292' fill='#8B97A8' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>按 16 × 16 切成 14 × 14 = 196 块</text>
+
+                <path d='M165 115 C 240 60 280 90 336 118' fill='none' stroke='#D9534F' strokeWidth='2' strokeDasharray='6 4' />
+                <path d='M330 112 L 340 120 L 328 126' fill='#D9534F' />
+
+                <rect x='346' y='60' width='130' height='130' fill='#FFFFFF' stroke='#D9534F' strokeWidth='2' />
+                <path d='M378 60 V 190 M411 60 V 190 M444 60 V 190 M346 92 H 476 M346 125 H 476 M346 158 H 476' stroke='#F0B8B6' strokeWidth='1' />
+                <text x='411' y='214' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>单个 patch：16 × 16 × 3</text>
+                <text x='411' y='234' fill='#8B97A8' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>= 768 个像素值</text>
+
+                <path d='M476 125 H 512' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M504 119 L 514 125 L 504 131' fill='#1E4FA8' />
+
+                <rect x='514' y='80' width='168' height='90' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='598' y='112' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>展平 Flatten</text>
+                <text x='598' y='136' fill='#4A5568' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>768 维向量</text>
+                <text x='598' y='158' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>16×16×3 = 768</text>
+
+                <path d='M682 125 H 712' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M704 119 L 714 125 L 704 131' fill='#1E4FA8' />
+
+                <rect x='714' y='80' width='192' height='90' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='810' y='112' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>线性投影</text>
+                <text x='810' y='136' fill='#4A5568' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>共享权重 W：768 → D</text>
+                <text x='810' y='158' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>B/16 的 D = 768</text>
+
+                <path d='M906 125 H 936' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M928 119 L 938 125 L 928 131' fill='#1E4FA8' />
+
+                <rect x='938' y='80' width='172' height='90' rx='8' fill='#0E3F8C' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='1024' y='112' fill='#FFFFFF' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Patch Token</text>
+                <text x='1024' y='136' fill='#CFE0F7' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>196 个，每个 D 维</text>
+                <text x='1024' y='158' fill='#FFC107' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>+ 位置编码 E_pos</text>
+
+                <rect x='514' y='222' width='596' height='58' rx='8' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='1' />
+                <text x='812' y='246' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>196 个 patch 共用同一个投影矩阵，再叠加可学习的位置嵌入</text>
+                <text x='812' y='269' fill='#1E4FA8' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>z₀ = [ x_cls ; x¹ₚW ; x²ₚW ; … ; x¹⁹⁶ₚW ] + E_pos</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 16 }}>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>分块 = 一次大步长卷积</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    不需要真的去"切图"。一个 kernel=16、stride=16 的 Conv2d(3, D) 就等价完成了分块 + 线性投影，展开后直接得到 196 × D 的序列。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>没有位置编码会怎样</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    自注意力对输入顺序是置换不变的：把 196 个 patch 随机打乱，输出完全一样。图像的空间结构就丢了，所以必须显式注入位置信息。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>本项目的做法</Text>
+                <Text style={{ fontSize: 16, color: '#4A5568', lineHeight: 1.55 }}>
+                    用 torch.zeros(1, N+1, D) 的可学习位置嵌入，截断正态初始化（std = 0.02），与 cls token 一起参与训练，让模型自己学"哪里是哪里"。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>20 / 38</Text>
+    </Box>
+</Slide>

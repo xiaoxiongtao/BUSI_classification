@@ -1,0 +1,49 @@
+<Slide style={{ padding: 0, background: '#0E3F8C', fontFamily: 'Microsoft YaHei' }}>
+    <svg width={1280} height={720} viewBox='0 0 1280 720' style={{ position: 'absolute', top: 0, left: 0, opacity: 0.18 }}>
+        <path d='M780 520 C 880 500 900 380 1000 360 S 1150 330 1260 300' fill='none' stroke='#8FC0F0' strokeWidth='3' />
+        <path d='M780 560 C 900 555 920 520 1020 505 S 1160 490 1260 478' fill='none' stroke='#FFC107' strokeWidth='3' strokeDasharray='10 8' />
+        <path d='M780 200 H 1260 M780 620 H 1260' stroke='#8FC0F0' strokeWidth='2' />
+        <circle cx='1000' cy='360' r='8' fill='#8FC0F0' />
+        <circle cx='1020' cy='505' r='8' fill='#FFC107' />
+    </svg>
+    <Box style={{ width: '100%', height: '100%', paddingTop: 84, paddingLeft: 72, paddingRight: 72, paddingBottom: 72, justifyContent: 'space-between' }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 40 }}>
+            <Text style={{ fontSize: 200, fontWeight: 'bold', color: '#3D7BD9', lineHeight: 1 }}>
+                06
+            </Text>
+            <Box style={{ width: 3, height: 150, background: 'rgba(255,255,255,0.35)' }} />
+            <Box style={{ gap: 14 }}>
+                <Text style={{ fontSize: 50, fontWeight: 'bold', color: '#FFFFFF', letterSpacing: 3 }}>
+                    实验结果与分析
+                </Text>
+                <Text style={{ fontFamily: 'Times New Roman', fontSize: 21, color: '#8FC0F0', letterSpacing: 1 }}>
+                    Experimental Results and Analysis
+                </Text>
+                <Text style={{ fontSize: 21, color: '#CFE0F7', lineHeight: 1.6 }}>
+                    六个模型、同一份划分、同一套超参，答案由数据给出。
+                </Text>
+            </Box>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 24 }}>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>公平对比</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    相同划分、相同增强、相同优化器，唯一变量是网络架构。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>结果反转</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    参数最多的 ViT-B/16 垫底，参数中等的 ResNet50 拿下最优成绩。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: 'rgba(255,255,255,0.10)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: 10, padding: 26, gap: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold', color: '#FFC107' }}>归因分析</Text>
+                <Text style={{ fontSize: 18, color: '#DCE8F7', lineHeight: 1.6 }}>
+                    不是 ViT 不好，而是 546 张训练图撑不起注意力的自由度。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+</Slide>

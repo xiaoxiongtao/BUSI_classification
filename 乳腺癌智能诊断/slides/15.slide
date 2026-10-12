@@ -1,0 +1,132 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>ResNet 家族：从 224×224 到三类概率</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>03 ResNet：深度残差网络</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 560, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={520} height={490} viewBox='0 0 520 490'>
+                <text x='260' y='20' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>ResNet 五阶段结构（以 ResNet-18 为例）</text>
+
+                <rect x='130' y='34' width='260' height='44' rx='8' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='2' />
+                <text x='260' y='62' fill='#1A2230' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>输入 224 × 224 × 3</text>
+
+                <path d='M260 78 V 96' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 90 L 260 98 L 266 90' fill='#1E4FA8' />
+
+                <rect x='110' y='98' width='300' height='52' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='260' y='120' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Stem：7×7 Conv 64, stride 2</text>
+                <text x='260' y='141' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>BN + ReLU + 3×3 MaxPool → 56 × 56 × 64</text>
+
+                <path d='M260 150 V 168' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 162 L 260 170 L 266 162' fill='#1E4FA8' />
+
+                <rect x='110' y='170' width='300' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='260' y='190' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Stage 1：残差块 × 2，64 通道</text>
+                <text x='260' y='209' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>56 × 56 × 64</text>
+
+                <path d='M260 216 V 234' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 228 L 260 236 L 266 228' fill='#1E4FA8' />
+
+                <rect x='110' y='236' width='300' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='260' y='256' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Stage 2：残差块 × 2，128 通道 / stride 2</text>
+                <text x='260' y='275' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>28 × 28 × 128</text>
+
+                <path d='M260 282 V 300' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 294 L 260 302 L 266 294' fill='#1E4FA8' />
+
+                <rect x='110' y='302' width='300' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='260' y='322' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Stage 3：残差块 × 2，256 通道 / stride 2</text>
+                <text x='260' y='341' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>14 × 14 × 256</text>
+
+                <path d='M260 348 V 366' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 360 L 260 368 L 266 360' fill='#1E4FA8' />
+
+                <rect x='110' y='368' width='300' height='46' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='260' y='388' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Stage 4：残差块 × 2，512 通道 / stride 2</text>
+                <text x='260' y='407' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>7 × 7 × 512</text>
+
+                <path d='M260 414 V 432' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M254 426 L 260 434 L 266 426' fill='#1E4FA8' />
+
+                <rect x='110' y='434' width='140' height='44' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='180' y='462' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>全局平均池化</text>
+
+                <rect x='270' y='434' width='140' height='44' rx='8' fill='#0E3F8C' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='340' y='462' fill='#FFFFFF' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>FC 512 → 3</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>四种深度，差别只在块的类型与数量</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 268 }}
+                defaultTextStyle={{ fontSize: 16, textAlign: 'center', color: '#1A2230' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '模型', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '残差块', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '各阶段块数', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '参数量', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '测试准确率', textStyle: { bold: true, color: '#FFFFFF' }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: 'ResNet-18', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: 'Basic', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '[2, 2, 2, 2]', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '11.2 M', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '87.3%', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        'ResNet-34', 'Basic', '[3, 4, 6, 3]', '21.3 M', '82.2%',
+                    ],
+                    [
+                        { text: 'ResNet-50', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: 'Bottleneck', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '[3, 4, 6, 3]', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '23.5 M', cellStyle: { background: { color: '#FFF8E1' } } },
+                        { text: '89.8%', textStyle: { bold: true, color: '#0E3F8C' }, cellStyle: { background: { color: '#FFF8E1' } } },
+                    ],
+                    [
+                        { text: 'ResNet-101', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: 'Bottleneck', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '[3, 4, 23, 3]', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '42.5 M', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '88.1%', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 8 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>为什么要分五个阶段？</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    空间分辨率逐级减半、通道数逐级翻倍：浅层抓边缘与纹理，中层抓形态，深层抓语义。全局平均池化把 7×7×512 压成 512 维向量，再交给 3 分类的全连接层。
+                </Text>
+                <Box style={{ background: '#FFF8E1', borderRadius: 6, padding: 10, marginTop: 'auto' }}>
+                    <Text style={{ fontSize: 16, color: '#1A2230', lineHeight: 1.5 }}>
+                        <span style={{ fontWeight: 'bold' }}>判断：</span>在本项目里 ResNet-50 反而优于更深的 ResNet-101——深度不是越深越好，要与数据量匹配。
+                    </Text>
+                </Box>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>15 / 38</Text>
+    </Box>
+</Slide>

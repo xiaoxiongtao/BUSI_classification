@@ -1,0 +1,89 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>最优模型 ResNet-50 的逐类表现</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>06 实验结果与分析</Text>
+    </Box>
+
+    <Box style={{ height: 604, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 530, gap: 10 }}>
+            <Image src="assets/cm_resnet50.png" style={{ width: 511, height: 470, borderRadius: 10, border: '1px solid #D6DCE5' }} />
+            <Text style={{ fontSize: 15, color: '#8B97A8' }}>
+                图：ResNet-50 在 118 张测试图上的混淆矩阵（行 = 真实类别，列 = 预测类别）
+            </Text>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#0E3F8C' }}>整体 89.8% 很亮眼，但临床更关心那 4 个漏诊</Text>
+            </Box>
+
+            <Table
+                style={{ width: '100%', height: 248 }}
+                defaultTextStyle={{ fontSize: 17, textAlign: 'center', color: '#1A2230' }}
+                defaultCellStyle={{
+                    border: {
+                        left: { width: 1, color: '#D6DCE5' }, right: { width: 1, color: '#D6DCE5' },
+                        top: { width: 1, color: '#D6DCE5' }, bottom: { width: 1, color: '#D6DCE5' },
+                    },
+                }}
+                cells={[
+                    [
+                        { text: '类别', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '样本数', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: 'Precision', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: 'Recall', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: 'F1', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                        { text: '特异度', textStyle: { bold: true, color: '#FFFFFF', fontSize: 18 }, cellStyle: { background: { color: '#0E3F8C' } } },
+                    ],
+                    [
+                        { text: '良性', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '66', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.897', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.924', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.910', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.865', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                    [
+                        { text: '恶性', textStyle: { bold: true, color: '#B03430' }, cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '32', cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.903', cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.875', textStyle: { bold: true, color: '#D9534F' }, cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.889', cellStyle: { background: { color: '#FDECEC' } } },
+                        { text: '0.965', cellStyle: { background: { color: '#FDECEC' } } },
+                    ],
+                    [
+                        { text: '正常', textStyle: { bold: true }, cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '20', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.895', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.850', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.872', cellStyle: { background: { color: '#F0F5FC' } } },
+                        { text: '0.980', cellStyle: { background: { color: '#F0F5FC' } } },
+                    ],
+                ]}
+            />
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>把矩阵读成临床语言</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    32 例恶性里 28 例被正确检出，<span style={{ fontWeight: 'bold', color: '#D9534F' }}>4 例被判成良性（漏诊）</span>；86 例非恶性中只有 3 例被误报为恶性。模型"宁可多报、不可漏报"的倾向，正是类别权重带来的效果。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>仍有 12 例判错，说明什么</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    错例集中在良性与正常之间（良性 3 例判为正常、正常 3 例判为良性）——这两类在灰阶上本就高度相似。它提醒我们：<span style={{ fontWeight: 'bold' }}>89.8% 是辅助水平，不是替代水平</span>。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>30 / 38</Text>
+    </Box>
+</Slide>

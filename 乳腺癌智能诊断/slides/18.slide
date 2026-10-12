@@ -1,0 +1,153 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>从卷积到注意力：归纳偏置的取舍</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>04 ViT：视觉 Transformer</Text>
+    </Box>
+
+    <Box style={{ flex: 1, flexDirection: 'row', gap: 24, paddingTop: 20, paddingLeft: 40, paddingRight: 40, paddingBottom: 20 }}>
+        <Box style={{ width: 700, background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, padding: 10, alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={680} height={470} viewBox='0 0 680 470'>
+                <text x='170' y='26' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>卷积：局部感受野</text>
+                <text x='510' y='26' fill='#D9534F' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>自注意力：全局关联</text>
+
+                <g>
+                    <rect x='40' y='50' width='280' height='280' rx='6' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='2' />
+                    <rect x='70' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='104' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='138' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='172' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='206' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='104' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='138' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='172' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='206' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='104' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='138' y='134' width='102' height='102' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='3' />
+                    <rect x='240' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='104' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='138' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='172' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='206' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='70' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='104' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='138' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='172' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='206' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='240' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='274' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <text x='180' y='356' fill='#1E4FA8' font-size='17' text-anchor='middle' font-family='Microsoft YaHei'>每层只聚合 3×3 邻域，靠堆叠扩大视野</text>
+                    <text x='180' y='382' fill='#4A5568' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>卷积核在全图共享权重</text>
+                </g>
+
+                <path d='M336 200 H 366' stroke='#8B97A8' strokeWidth='3' />
+                <path d='M356 192 L 368 200 L 356 208' fill='#8B97A8' />
+
+                <g>
+                    <rect x='380' y='50' width='280' height='280' rx='6' fill='#FFFFFF' stroke='#D6DCE5' strokeWidth='2' />
+                    <rect x='410' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='444' y='66' width='34' height='34' fill='#FDECEC' stroke='#D9534F' strokeWidth='2' />
+                    <rect x='478' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='546' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='66' width='34' height='34' fill='#FDECEC' stroke='#D9534F' strokeWidth='2' />
+                    <rect x='614' y='66' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='410' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='444' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='478' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='546' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='100' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='410' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='444' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='478' y='134' width='102' height='102' fill='#FFC107' stroke='#0E3F8C' strokeWidth='3' />
+                    <rect x='580' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='134' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='410' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='168' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='410' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='202' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='410' y='236' width='34' height='34' fill='#FDECEC' stroke='#D9534F' strokeWidth='2' />
+                    <rect x='444' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='478' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='546' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='236' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='236' width='34' height='34' fill='#FDECEC' stroke='#D9534F' strokeWidth='2' />
+                    <rect x='410' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='444' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='478' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='512' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='546' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='580' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+                    <rect x='614' y='270' width='34' height='34' fill='#F5F7FA' stroke='#D6DCE5' strokeWidth='1' />
+
+                    <path d='M529 185 L 461 83' stroke='#D9534F' strokeWidth='2' />
+                    <path d='M529 185 L 597 83' stroke='#D9534F' strokeWidth='2' />
+                    <path d='M529 185 L 427 253' stroke='#D9534F' strokeWidth='2' />
+                    <path d='M529 185 L 631 253' stroke='#D9534F' strokeWidth='2' />
+                    <text x='520' y='356' fill='#D9534F' font-size='17' text-anchor='middle' font-family='Microsoft YaHei'>第一层就与全图任意位置建立连接</text>
+                    <text x='520' y='382' fill='#4A5568' font-size='16' text-anchor='middle' font-family='Microsoft YaHei'>关联强度由内容相似度动态决定</text>
+                </g>
+
+                <rect x='60' y='404' width='560' height='52' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='340' y='427' fill='#1A2230' font-size='17' text-anchor='middle' font-family='Microsoft YaHei'>卷积把"局部性、平移等变"写进了结构（归纳偏置）</text>
+                <text x='340' y='448' fill='#1E4FA8' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>注意力什么都没假设，代价是必须自己从数据里学出来</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flex: 1, gap: 12 }}>
+            <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 12, background: '#E8EFF8', borderRadius: 8, paddingLeft: 16, paddingTop: 9, paddingBottom: 9 }}>
+                <FAIcon name='info-circle' style={{ fill: '#1E4FA8', width: 24, height: 24 }} />
+                <Text style={{ fontSize: 19, fontWeight: 'bold', color: '#0E3F8C' }}>"看得更全"就等于"看得更好"吗？</Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>卷积的三条先天假设</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    <span style={{ fontWeight: 'bold' }}>局部性</span>：相邻像素关系更紧密；<span style={{ fontWeight: 'bold' }}>平移等变</span>：同一特征换位置仍应被识别；<span style={{ fontWeight: 'bold' }}>权重共享</span>：全图用同一套卷积核。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderLeft: '5px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>注意力把这些假设全删了</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    每个位置对所有位置做加权求和，权重由 Q 与 K 的相似度算出。更灵活，但参数自由度高得多，需要海量数据才能收敛到合理解。
+                </Text>
+            </Box>
+
+            <Box style={{ flex: 1, background: '#FFF8E1', border: '1px solid #FFC107', borderLeft: '5px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>对本项目的直接含义</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.6 }}>
+                    只有 546 张训练图时，卷积的先天假设相当于"免费的专业先验"；而 ViT 必须从零学这些先验——这正是后面实验结果反转的根源。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>18 / 38</Text>
+    </Box>
+</Slide>

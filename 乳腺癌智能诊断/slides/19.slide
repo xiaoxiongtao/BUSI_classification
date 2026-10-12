@@ -1,0 +1,109 @@
+<Slide style={{ padding: 0, background: '#FFFFFF', fontFamily: 'Microsoft YaHei' }}>
+    <Box style={{ width: '100%', height: 76, background: '#0E3F8C', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40 }}>
+        <Box style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+            <Box style={{ width: 6, height: 34, background: '#FFC107' }} />
+            <Text style={{ fontSize: 32, fontWeight: 'bold', color: '#FFFFFF' }}>ViT 整体框架：把图像当成一句话</Text>
+        </Box>
+        <Text style={{ fontSize: 16, color: '#8FC0F0' }}>04 ViT：视觉 Transformer</Text>
+    </Box>
+
+    <Box style={{ height: 604, gap: 12, paddingTop: 18, paddingLeft: 40, paddingRight: 40, paddingBottom: 18 }}>
+        <Box style={{ background: '#F7F9FC', border: '1px solid #D6DCE5', borderRadius: 10, paddingTop: 6, paddingBottom: 6, alignItems: 'center' }}>
+            <svg width={1160} height={400} viewBox='0 0 1160 400'>
+                <text x='580' y='22' fill='#0E3F8C' font-size='19' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Vision Transformer 前向流程（ViT-B/16，输入 224 × 224）</text>
+
+                <rect x='20' y='120' width='96' height='96' fill='#FFFFFF' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M44 120 V 216 M68 120 V 216 M92 120 V 216 M20 144 H 116 M20 168 H 116 M20 192 H 116' stroke='#B9CDF0' strokeWidth='1' />
+                <text x='68' y='240' fill='#1A2230' font-size='15' text-anchor='middle' font-family='Microsoft YaHei'>224 × 224 × 3</text>
+
+                <path d='M116 168 H 140' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M132 162 L 142 168 L 132 174' fill='#1E4FA8' />
+
+                <rect x='142' y='118' width='176' height='100' rx='8' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='230' y='148' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Patch Embedding</text>
+                <text x='230' y='170' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>Conv 16×16, stride 16</text>
+                <text x='230' y='192' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>196 块 × 768 维</text>
+                <text x='230' y='240' fill='#8B97A8' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>14 × 14 = 196 个图像块</text>
+
+                <path d='M318 168 H 342' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M334 162 L 344 168 L 334 174' fill='#1E4FA8' />
+
+                <rect x='344' y='118' width='176' height='100' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='432' y='146' fill='#0E3F8C' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>拼 CLS + 位置编码</text>
+                <text x='432' y='168' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>在序列最前面插入 cls token</text>
+                <text x='432' y='190' fill='#4A5568' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>叠加可学习位置嵌入</text>
+                <text x='432' y='240' fill='#8B97A8' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>197 × 768</text>
+
+                <path d='M520 168 H 544' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M536 162 L 546 168 L 536 174' fill='#1E4FA8' />
+
+                <rect x='546' y='66' width='404' height='204' rx='10' fill='#FFFFFF' stroke='#0E3F8C' strokeWidth='3' />
+                <text x='748' y='92' fill='#0E3F8C' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Transformer Encoder × L（B/16 为 12 层）</text>
+
+                <rect x='566' y='108' width='150' height='46' rx='6' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='641' y='137' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Layer Norm</text>
+                <path d='M716 131 H 736' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M728 125 L 738 131 L 728 137' fill='#1E4FA8' />
+                <rect x='738' y='108' width='190' height='46' rx='6' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='833' y='137' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Multi-Head Attention</text>
+
+                <path d='M833 154 V 196 H 641 V 160' fill='none' stroke='#D9534F' strokeWidth='2' />
+                <path d='M635 174 L 641 158 L 647 174' fill='#D9534F' />
+                <circle cx='833' cy='196' r='14' fill='#FFFFFF' stroke='#D9534F' strokeWidth='2' />
+                <text x='833' y='202' fill='#D9534F' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                <path d='M928 131 H 566' stroke='#1E4FA8' strokeWidth='2' />
+
+                <rect x='566' y='216' width='150' height='46' rx='6' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='641' y='245' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>Layer Norm</text>
+                <path d='M716 239 H 736' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M728 233 L 738 239 L 728 245' fill='#1E4FA8' />
+                <rect x='738' y='216' width='190' height='46' rx='6' fill='#E8EFF8' stroke='#1E4FA8' strokeWidth='2' />
+                <text x='833' y='245' fill='#0E3F8C' font-size='16' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>MLP（GELU + Dropout）</text>
+                <path d='M833 262 V 296 H 641 V 268' fill='none' stroke='#D9534F' strokeWidth='2' />
+                <path d='M635 282 L 641 266 L 647 282' fill='#D9534F' />
+                <circle cx='833' cy='296' r='14' fill='#FFFFFF' stroke='#D9534F' strokeWidth='2' />
+                <text x='833' y='302' fill='#D9534F' font-size='18' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>+</text>
+
+                <path d='M950 168 H 976' stroke='#1E4FA8' strokeWidth='2' />
+                <path d='M968 162 L 978 168 L 968 174' fill='#1E4FA8' />
+
+                <rect x='978' y='118' width='164' height='100' rx='8' fill='#0E3F8C' stroke='#0E3F8C' strokeWidth='2' />
+                <text x='1060' y='146' fill='#FFFFFF' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>取 cls token</text>
+                <text x='1060' y='170' fill='#CFE0F7' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>Layer Norm</text>
+                <text x='1060' y='192' fill='#FFC107' font-size='15' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>MLP Head → 3 类</text>
+                <text x='1060' y='240' fill='#8B97A8' font-size='14' text-anchor='middle' font-family='Microsoft YaHei'>良性 / 恶性 / 正常</text>
+
+                <rect x='300' y='330' width='560' height='56' rx='8' fill='#FFF8E1' stroke='#FFC107' strokeWidth='2' />
+                <text x='580' y='352' fill='#1A2230' font-size='17' text-anchor='middle' font-family='Microsoft YaHei'>一句话概括：切块 → 嵌入 → 加位置 → 反复做"全局混信息" → 用 cls token 做分类</text>
+                <text x='580' y='375' fill='#1E4FA8' font-size='17' font-weight='bold' text-anchor='middle' font-family='Microsoft YaHei'>全程没有一次卷积，特征图尺寸始终是 197 × 768</text>
+            </svg>
+        </Box>
+
+        <Box style={{ flexDirection: 'row', gap: 16 }}>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #1E4FA8', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>为什么需要 cls token</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    196 个 patch token 地位平等，需要一个"汇总位"来承载整图语义。cls token 不对应任何图像区域，经过多层注意力后成为全局表示。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #FFC107', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>为什么序列长度不变</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    Encoder 每一层的输入与输出都是 197 × 768，因此可以任意堆叠 L 层。这与 CNN"分辨率递减、通道递增"的金字塔截然不同。
+                </Text>
+            </Box>
+            <Box style={{ flex: 1, background: '#FFFFFF', border: '1px solid #D6DCE5', borderTop: '4px solid #D9534F', borderRadius: 8, padding: 14, gap: 6 }}>
+                <Text style={{ fontSize: 21, fontWeight: 'bold', color: '#0E3F8C' }}>计算量随什么增长</Text>
+                <Text style={{ fontSize: 17, color: '#4A5568', lineHeight: 1.55 }}>
+                    注意力矩阵是 197 × 197，复杂度为 O(N²·d)。图像分辨率翻倍，patch 数变 4 倍，注意力开销变 16 倍——这是 ViT 难上高分辨率的原因。
+                </Text>
+            </Box>
+        </Box>
+    </Box>
+
+    <Box style={{ height: 40, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 40, paddingRight: 40, borderTop: '1px solid #E5E7EB' }}>
+        <Text style={{ fontSize: 14, color: '#8B97A8' }}>BUSI 乳腺超声图像分类 · 乳腺癌智能诊断</Text>
+        <Text style={{ fontSize: 14, color: '#1E4FA8' }}>19 / 38</Text>
+    </Box>
+</Slide>
